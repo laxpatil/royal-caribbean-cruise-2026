@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cruise Day Planner 🚢</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #0f4c75 0%, #1b6ca8 40%, #2196a6 100%);
+      min-height: 100vh;
+      padding: 24px 16px;
+      color: #1a1a2e;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 32px;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .header p {
+      font-size: 1rem;
+      opacity: 0.88;
+      margin-top: 6px;
+    }
+
+    .wave-emoji { font-size: 1.5rem; vertical-align: middle; }
+
+    /* Tab Navigation */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 28px;
+      border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(6px);
+    }
+
+    .tab-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+
+    .tab-btn.active {
+      background: white;
+      color: #1b6ca8;
+      border-color: white;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    /* Day Panel */
+    .day-panel { display: none; }
+    .day-panel.active { display: block; }
+
+    .port-banner {
+      border-radius: 20px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    .costa-banner { background: linear-gradient(135deg, #e67e22, #d35400); }
+    .roatan-banner { background: linear-gradient(135deg, #27ae60, #16a085); }
+
+    .port-banner .port-icon { font-size: 2.8rem; }
+    .port-banner h2 { font-size: 1.5rem; font-weight: 900; }
+    .port-banner p { font-size: 0.88rem; opacity: 0.9; margin-top: 3px; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 8px; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 28px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #b3d9f7, #e8f4f8);
+      border-radius: 2px;
+    }
+
+    .time-block {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .time-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid #1b6ca8;
+      flex-shrink: 0;
+      margin-top: 18px;
+      margin-left: 19px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 1;
+    }
+
+    .time-card {
+      flex: 1;
+      background: white;
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.09);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .time-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.13);
+    }
+
+    .time-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #1b6ca8;
+      margin-bottom: 4px;
+    }
+
+    .time-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+
+    .time-card p {
+      font-size: 0.85rem;
+      color: #555;
+      line-height: 1.55;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .tag-toddler { background: #fde8f5; color: #c0397a; }
+    .tag-food    { background: #fef3e2; color: #d68910; }
+    .tag-relax   { background: #e8f8f5; color: #1a8a6e; }
+    .tag-tip     { background: #eaf3ff; color: #1b6ca8; }
+    .tag-walk    { background: #f3e8ff; color: #7d3c98; }
+    .tag-cool    { background: #e8f5e9; color: #2e7d32; }
+
+    /* Tips Box */
+    .tips-box {
+      background: white;
+      border-radius: 18px;
+      padding: 18px 20px;
+      margin-top: 20px;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.09);
+    }
+
+    .tips-box h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #1b6ca8;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tips-list { list-style: none; }
+    .tips-list li {
+      font-size: 0.85rem;
+      color: #444;
+      padding: 5px 0;
+      border-bottom: 1px dashed #e8edf2;
+      display: flex;
+      gap: 8px;
+      line-height: 1.5;
+    }
+    .tips-list li:last-child { border-bottom: none; }
+    .tips-list li .bullet { flex-shrink: 0; }
+
+    /* Pack List */
+    .pack-box {
+      background: white;
+      border-radius: 18px;
+      padding: 18px 20px;
+      margin-top: 16px;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.09);
+    }
+
+    .pack-box h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #e67e22;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pack-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .pack-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: #444;
+      padding: 5px 8px;
+      background: #fafbfc;
+      border-radius: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      color: rgba(255,255,255,0.7);
+      margin-top: 28px;
+      font-size: 0.82rem;
+    }
+
+    /* Weather Badge */
+    .weather-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      color: white;
+      font-weight: 700;
+      margin-top: 8px;
+      backdrop-filter: blur(4px);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>🚢 Cruise Day Planner</h1>
+    <p>April 12–19 &nbsp;·&nbsp; With your 16-month-old 👶 &nbsp;·&nbsp; <span class="wave-emoji">🌊</span> Caribbean</p>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('costa')">🇲🇽 Costa Maya</button>
+    <button class="tab-btn" onclick="showTab('roatan')">🇭🇳 Roatán</button>
+  </div>
+
+  <!-- ===================== COSTA MAYA ===================== -->
+  <div class="day-panel active" id="costa">
+
+    <div class="port-banner costa-banner">
+      <div class="port-icon">🇲🇽</div>
+      <div>
+        <h2>Costa Maya, Mexico</h2>
+        <p>Easy, relaxed port • Perfect for toddlers • Ship docks right at the pier!</p>
+        <div class="weather-badge">☀️ ~30°C / 86°F &nbsp;·&nbsp; Sunny & Humid</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">7:00 – 8:00 AM</div>
+          <h3>🍳 Breakfast on the Ship</h3>
+          <p>Have a full breakfast on board before disembarking. Feed your toddler well and pack snacks — ports can be unpredictable for meal timing.</p>
+          <div class="tag-row">
+            <span class="tag tag-tip">🚢 Do This First</span>
+            <span class="tag tag-food">🍌 Pack Toddler Snacks</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">8:30 – 9:30 AM</div>
+          <h3>🏖️ Costa Maya Pier Plaza</h3>
+          <p>The pier itself has a beautiful free pool, splash area, and sandy beach — perfect for toddlers! The <strong>Mayan Ruins replica</strong> area is photo-worthy and shaded. Stroll slowly, let your little one explore the colorful open-air market stalls.</p>
+          <div class="tag-row">
+            <span class="tag tag-toddler">👶 Toddler Splash Area</span>
+            <span class="tag tag-walk">🚶 Easy Stroll</span>
+            <span class="tag tag-cool">🌴 Shaded Areas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">9:30 – 11:30 AM</div>
+          <h3>🌊 Mahahual Beach</h3>
+          <p>Just a short taxi ride (~5 min) from the pier is <strong>Mahahual</strong> — a quaint, relaxed Caribbean beach village. The water is calm, shallow, and crystal clear — ideal for a 16-month-old to paddle and play. Grab a beachside palapa and relax.</p>
+          <div class="tag-row">
+            <span class="tag tag-toddler">👶 Shallow Calm Water</span>
+            <span class="tag tag-relax">🌊 Super Relaxed</span>
+            <span class="tag tag-tip">🚕 ~$5–8 taxi</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">11:30 AM – 1:00 PM</div>
+          <h3>🌮 Lunch at a Mahahual Beach Bar</h3>
+          <p>Enjoy fresh <strong>fish tacos, guacamole, and fresh coconut agua fresca</strong> at one of the laid-back beach restaurants along the Malecon (boardwalk). Most places are relaxed and toddler-friendly. Great time for a nap in the stroller!</p>
+          <div class="tag-row">
+            <span class="tag tag-food">🌮 Fish Tacos</span>
+            <span class="tag tag-toddler">😴 Stroller Nap Time</span>
+            <span class="tag tag-relax">🥥 Chill Vibes</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">1:00 – 2:30 PM</div>
+          <h3>🌴 Back to Pier – Pool & Shopping</h3>
+          <p>Head back to the pier area. Let your toddler enjoy the <strong>free pier pool</strong> while you browse the artisan shops. Pick up hammocks, Mayan masks, or vanilla extract as souvenirs. Cool and shaded walkways make this easy.</p>
+          <div class="tag-row">
+            <span class="tag tag-toddler">🏊 Free Pier Pool</span>
+            <span class="tag tag-walk">🛍️ Souvenir Shopping</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">2:30 – 3:30 PM</div>
+          <h3>⛵ Return to Ship</h3>
+          <p>Be back at the ship <strong>at least 60–90 min before departure</strong>. Rinse off, change your toddler, and settle in. Head to the ship's pool deck for a refreshing dip before dinner!</p>
+          <div class="tag-row">
+            <span class="tag tag-tip">⚠️ Don't miss the ship!</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tips-box">
+      <h3>💡 Costa Maya Tips with a Toddler</h3>
+      <ul class="tips-list">
+        <li><span class="bullet">🌞</span><span>Apply reef-safe sunscreen every 90 min — the Mexican sun is intense in April!</span></li>
+        <li><span class="bullet">🧴</span><span>Bring a portable shade tent or beach umbrella — the pier has limited shade on the beach.</span></li>
+        <li><span class="bullet">💵</span><span>USD is widely accepted at the pier. Carry small bills ($1–$5) for tips and snacks.</span></li>
+        <li><span class="bullet">🚶</span><span>The pier area is <strong>fully walkable &amp; stroller-friendly</strong> — no need for an excursion!</span></li>
+        <li><span class="bullet">🦺</span><span>Skip the cenotes &amp; ruins tours with a 16-month-old — save those for the next trip!</span></li>
+        <li><span class="bullet">🧊</span><span>Stay hydrated! Bring extra water bottles for your toddler.</span></li>
+      </ul>
+    </div>
+
+    <div class="pack-box">
+      <h3>🎒 Pack for Costa Maya</h3>
+      <div class="pack-grid">
+        <div class="pack-item">🩱 Baby swimsuit + swim diaper</div>
+        <div class="pack-item">☀️ Reef-safe SPF 50 sunscreen</div>
+        <div class="pack-item">👒 Wide-brim sun hat (toddler)</div>
+        <div class="pack-item">🧴 Baby rash guard (UV top)</div>
+        <div class="pack-item">🍌 Toddler snacks (banana, crackers)</div>
+        <div class="pack-item">💧 2× large water bottles</div>
+        <div class="pack-item">👟 Sandals (easy on/off for beach)</div>
+        <div class="pack-item">🧸 1 comfort toy</div>
+        <div class="pack-item">🪣 Small sand bucket & shovel</div>
+        <div class="pack-item">🩹 Mini first aid kit</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===================== ROATÁN ===================== -->
+  <div class="day-panel" id="roatan">
+
+    <div class="port-banner roatan-banner">
+      <div class="port-icon">🇭🇳</div>
+      <div>
+        <h2>Roatán, Honduras</h2>
+        <p>Stunning coral reef island • Lush & tropical • Calm Caribbean beaches</p>
+        <div class="weather-badge">🌤️ ~29°C / 85°F &nbsp;·&nbsp; Tropical & Breezy</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">7:00 – 8:00 AM</div>
+          <h3>🍳 Breakfast on the Ship</h3>
+          <p>Same strategy as Costa Maya — fill up on the ship. Pack a snack bag for the toddler and pre-apply sunscreen before you head off.</p>
+          <div class="tag-row">
+            <span class="tag tag-tip">🚢 Start Strong</span>
+            <span class="tag tag-food">🥞 Ship Breakfast</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">8:30 – 10:00 AM</div>
+          <h3>🌺 West Bay Beach</h3>
+          <p><strong>West Bay Beach</strong> is consistently rated one of the most beautiful beaches in the Caribbean. The water is impossibly clear and very calm — like a natural bathtub for your toddler. Arrive early to claim a shaded palapa and enjoy the beach before the crowds. A taxi water shuttle (~$5–10) or a short cab ride gets you there.</p>
+          <div class="tag-row">
+            <span class="tag tag-toddler">👶 Calm Crystal Water</span>
+            <span class="tag tag-relax">🏖️ World-Class Beach</span>
+            <span class="tag tag-cool">🌴 Arrive Early!</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">10:00 – 11:00 AM</div>
+          <h3>🐠 Snorkel Viewing (Adults Take Turns!)</h3>
+          <p>West Bay sits on one of the <strong>best coral reefs in the Western Hemisphere</strong>. One parent can snorkel steps from the shore while the other stays in the shallows with the toddler, then swap. The reef starts just 10–15 meters from shore — no boat needed!</p>
+          <div class="tag-row">
+            <span class="tag tag-relax">🤿 Take Turns Snorkeling</span>
+            <span class="tag tag-toddler">👶 Shallow play for baby</span>
+            <span class="tag tag-cool">🐠 Incredible Marine Life</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">11:00 AM – 12:30 PM</div>
+          <h3>🥘 Lunch at a Beachfront Restaurant</h3>
+          <p>West Bay has wonderful open-air restaurants right on the sand. Try <strong>Sundowner's</strong> or <strong>Bite on the Beach</strong> for fresh ceviche, grilled fish, and tropical drinks. Most are relaxed and welcoming to families with small children. Perfect time for a toddler nap under the palapa! 😴</p>
+          <div class="tag-row">
+            <span class="tag tag-food">🐟 Fresh Ceviche</span>
+            <span class="tag tag-toddler">😴 Post-swim Nap</span>
+            <span class="tag tag-relax">🍹 Tropical Drinks</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">12:30 – 2:00 PM</div>
+          <h3>🦜 Gumbalimba Park (Optional)</h3>
+          <p>If your toddler is energized after lunch, <strong>Gumbalimba Park</strong> is a short ride away. It has tropical gardens, macaws, monkeys, and a beach — all in one. It's <strong>toddler-safe, shaded, and stroller-friendly</strong> along most paths. The macaws landing on shoulders is a magical memory! Entry: ~$25–35/adult.</p>
+          <div class="tag-row">
+            <span class="tag tag-toddler">🦜 Macaws & Monkeys!</span>
+            <span class="tag tag-walk">🌿 Shaded Jungle Walk</span>
+            <span class="tag tag-cool">📸 Amazing Photos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">2:00 – 3:30 PM</div>
+          <h3>🛍️ Mahogany Bay Pier / Back to Ship</h3>
+          <p>Head back toward the ship via <strong>Mahogany Bay</strong> — the pier area has a zipline over the water (one parent could try while the other chills with the toddler!), artisan shops, and a beautiful beach. Browse local crafts — Honduran coffee, wooden carvings, and jewelry make great gifts.</p>
+          <div class="tag-row">
+            <span class="tag tag-walk">🛍️ Local Crafts</span>
+            <span class="tag tag-cool">🤸 Pier Zipline (Adults!)</span>
+            <span class="tag tag-tip">⚠️ Back before all-aboard!</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="time-block">
+        <div class="time-dot"></div>
+        <div class="time-card">
+          <div class="time-label">3:30 – 4:00 PM</div>
+          <h3>⛵ Board the Ship</h3>
+          <p>Head back on board, rinse off, and enjoy a golden Caribbean sunset from the deck with your little one. A perfect end to a magical Roatán day! 🌅</p>
+          <div class="tag-row">
+            <span class="tag tag-relax">🌅 Sunset on Deck</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tips-box">
+      <h3>💡 Roatán Tips with a Toddler</h3>
+      <ul class="tips-list">
+        <li><span class="bullet">🚕</span><span>Agree on taxi fares <strong>before you get in</strong> — always negotiate. $10–15 from pier to West Bay is reasonable.</span></li>
+        <li><span class="bullet">🤿</span><span>Bring your own baby swim vest / floatie if your toddler loves the water — rentals for infants are rare.</span></li>
+        <li><span class="bullet">🌊</span><span>West Bay Beach has <strong>no harsh waves</strong> — it's extremely safe for toddlers who love water.</span></li>
+        <li><span class="bullet">🦟</span><span>Pack insect repellent — the jungle areas have mosquitoes, especially near Gumbalimba.</span></li>
+        <li><span class="bullet">📱</span><span>Download offline maps before leaving the ship — roaming data can be expensive in Honduras.</span></li>
+        <li><span class="bullet">💵</span><span>USD is accepted everywhere. Lempiras are the local currency but rarely needed by tourists.</span></li>
+      </ul>
+    </div>
+
+    <div class="pack-box">
+      <h3>🎒 Pack for Roatán</h3>
+      <div class="pack-grid">
+        <div class="pack-item">🩱 Baby swimsuit + swim diaper</div>
+        <div class="pack-item">☀️ Reef-safe SPF 50 sunscreen</div>
+        <div class="pack-item">🤿 Snorkel gear (adults)</div>
+        <div class="pack-item">🦺 Toddler swim vest / floatie</div>
+        <div class="pack-item">🧴 Baby rash guard + hat</div>
+        <div class="pack-item">🦟 Baby-safe insect repellent</div>
+        <div class="pack-item">🍌 Toddler snacks & pouches</div>
+        <div class="pack-item">💧 Reusable water bottles</div>
+        <div class="pack-item">📷 Waterproof phone case</div>
+        <div class="pack-item">🩹 Mini first aid kit</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    🚢 April 12–19 Caribbean Cruise &nbsp;·&nbsp; Built with ❤️ for your family adventure
+  </div>
+
+  <script>
+    function showTab(tab) {
+      document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(tab).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
