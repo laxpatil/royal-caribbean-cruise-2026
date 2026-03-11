@@ -194,6 +194,7 @@
     }
     .costa-banner { background: linear-gradient(135deg, #e67e22 0%, #d35400 50%, #c0392b 100%); }
     .roatan-banner { background: linear-gradient(135deg, #27ae60 0%, #16a085 50%, #1abc9c 100%); }
+    .cococay-banner { background: linear-gradient(135deg, #e91e63 0%, #c2185b 50%, #ad1457 100%); }
     .port-banner .port-icon { font-size: 3rem; z-index: 1; }
     .port-banner .port-info { z-index: 1; }
     .port-banner h2 { font-size: 1.5rem; font-weight: 900; }
@@ -221,6 +222,7 @@
     .budget-fill { height: 100%; border-radius: 3px; transition: width 1.5s ease; }
     .budget-fill-costa { background: linear-gradient(90deg, #f39c12, #e74c3c); }
     .budget-fill-roatan { background: linear-gradient(90deg, #2ecc71, #3498db); }
+    .budget-fill-cococay { background: linear-gradient(90deg, #e91e63, #ff5252); }
 
     /* ===== Timeline ===== */
     .timeline { position: relative; padding-left: 0; }
@@ -233,6 +235,9 @@
     }
     .timeline.roatan-timeline::before {
       background: linear-gradient(180deg, var(--accent-roatan), rgba(46,204,113,0.15));
+    }
+    .timeline.cococay-timeline::before {
+      background: linear-gradient(180deg, #e91e63, rgba(233,30,99,0.15));
     }
 
     .time-block {
@@ -257,11 +262,13 @@
     }
     .costa-dot { border-color: var(--accent-costa); }
     .roatan-dot { border-color: var(--accent-roatan); }
+    .cococay-dot { border-color: #e91e63; }
     .time-block:hover .time-dot {
       transform: scale(1.3);
     }
     .time-block:hover .costa-dot { box-shadow: 0 0 20px rgba(243,156,18,0.5); }
     .time-block:hover .roatan-dot { box-shadow: 0 0 20px rgba(46,204,113,0.5); }
+    .time-block:hover .cococay-dot { box-shadow: 0 0 20px rgba(233,30,99,0.5); }
 
     .time-card {
       flex: 1;
@@ -283,6 +290,7 @@
     }
     .costa-label { color: var(--accent-costa); }
     .roatan-label { color: var(--accent-roatan); }
+    .cococay-label { color: #e91e63; }
     .time-card h3 { font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 7px; }
     .time-card p { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; }
     .time-card strong { color: var(--text-primary); }
@@ -303,6 +311,43 @@
     .tag-walk    { background: rgba(167,139,250,0.15); color: #a78bfa; border-color: rgba(167,139,250,0.25); }
     .tag-cool    { background: rgba(45,212,191,0.15); color: #2dd4bf; border-color: rgba(45,212,191,0.25); }
     .tag-cost    { background: rgba(255,215,0,0.15); color: #ffd700; border-color: rgba(255,215,0,0.25); }
+
+    /* ===== Option Comparison Cards ===== */
+    .options-section { margin: 16px 0; }
+    .options-section > h3 {
+      font-size: 0.95rem; font-weight: 800; color: var(--text-primary);
+      margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+    }
+    .option-cards { display: flex; flex-direction: column; gap: 10px; }
+    .option-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 16px; padding: 16px 18px; position: relative;
+      backdrop-filter: blur(12px); transition: all 0.3s; overflow: hidden;
+    }
+    .option-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+    .option-card.recommended {
+      border-color: rgba(255,215,0,0.35);
+      background: rgba(255,215,0,0.05);
+    }
+    .option-badge {
+      position: absolute; top: 12px; right: 12px;
+      padding: 3px 10px; border-radius: 12px;
+      font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px;
+    }
+    .badge-free { background: rgba(46,204,113,0.2); color: #2ecc71; }
+    .badge-premium { background: rgba(233,30,99,0.2); color: #f48fb1; }
+    .badge-splurge { background: rgba(255,215,0,0.2); color: #ffd700; }
+    .badge-pick { background: rgba(255,215,0,0.25); color: #ffd700; }
+    .option-card h4 { font-size: 0.95rem; font-weight: 800; color: white; margin-bottom: 4px; }
+    .option-card .option-price { font-size: 0.82rem; color: #ffd54f; font-weight: 700; margin-bottom: 6px; }
+    .option-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; }
+    .option-card .option-pros {
+      list-style: none; margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .option-card .option-pros li {
+      font-size: 0.72rem; padding: 3px 10px; border-radius: 12px;
+      background: rgba(255,255,255,0.06); color: var(--text-secondary);
+    }
 
     /* ===== Collapsible Sections ===== */
     .collapsible {
@@ -399,6 +444,7 @@
     }
     .scroll-progress.costa-progress { background: linear-gradient(90deg, #f39c12, #e74c3c); }
     .scroll-progress.roatan-progress { background: linear-gradient(90deg, #2ecc71, #3498db); }
+    .scroll-progress.cococay-progress { background: linear-gradient(90deg, #e91e63, #ff5252); }
 
     /* ===== Back to Top ===== */
     .back-to-top {
@@ -414,6 +460,7 @@
     .back-to-top:hover { transform: translateY(-3px) scale(1.1); }
     .back-to-top.costa-top { background: linear-gradient(135deg, var(--accent-costa), var(--accent-costa-dark)); box-shadow: 0 4px 16px rgba(243,156,18,0.4); }
     .back-to-top.roatan-top { background: linear-gradient(135deg, var(--accent-roatan), var(--accent-roatan-dark)); box-shadow: 0 4px 16px rgba(46,204,113,0.4); }
+    .back-to-top.cococay-top { background: linear-gradient(135deg, #e91e63, #c2185b); box-shadow: 0 4px 16px rgba(233,30,99,0.4); }
   </style>
 </head>
 <body>
@@ -425,10 +472,10 @@
   <div class="particles" id="particles"></div>
 
   <!-- Scroll Progress -->
-  <div class="scroll-progress costa-progress" id="scrollProgress" style="width: 0%"></div>
+  <div class="scroll-progress cococay-progress" id="scrollProgress" style="width: 0%"></div>
 
   <!-- Back to Top -->
-  <button class="back-to-top costa-top" id="backToTop" onclick="window.scrollTo({top:0})">↑</button>
+  <button class="back-to-top cococay-top" id="backToTop" onclick="window.scrollTo({top:0})">↑</button>
 
   <div class="container">
 
@@ -449,12 +496,13 @@
 
     <!-- Tabs -->
     <div class="tabs">
-      <button class="tab-btn active-costa" id="tab-costa" onclick="showTab('costa')">🇲🇽 Costa Maya</button>
+      <button class="tab-btn active-cococay" id="tab-cococay" onclick="showTab('cococay')">🏝️ CocoCay</button>
+      <button class="tab-btn" id="tab-costa" onclick="showTab('costa')">🇲🇽 Costa Maya</button>
       <button class="tab-btn" id="tab-roatan" onclick="showTab('roatan')">🇭🇳 Roatán</button>
     </div>
 
     <!-- ==================== COSTA MAYA ==================== -->
-    <div class="day-panel active" id="costa">
+    <div class="day-panel" id="costa">
 
       <div class="port-banner costa-banner">
         <div class="port-icon">🇲🇽</div>
@@ -774,6 +822,322 @@
 
     </div>
 
+    <!-- ==================== COCOCAY ==================== -->
+    <div class="day-panel active" id="cococay">
+
+      <div class="port-banner cococay-banner">
+        <div class="port-icon">🏝️</div>
+        <div class="port-info">
+          <h2>Perfect Day at CocoCay</h2>
+          <p class="port-sub">Day 2 — Mon, April 13 · RC's Private Island · Bahamas</p>
+          <div class="weather-badge">☀️ ~28°C / 82°F &nbsp;·&nbsp; Sunny & Breezy</div>
+        </div>
+      </div>
+
+      <div class="budget-bar">
+        <div class="budget-icon">💰</div>
+        <div class="budget-info">
+          <div class="budget-label">Estimated Budget</div>
+          <div class="budget-amount">$0 – $200 USD</div>
+          <div class="budget-detail">Free areas available · Paid upgrades optional · See options below</div>
+        </div>
+        <div class="budget-progress"><div class="budget-fill budget-fill-cococay" style="width: 45%"></div></div>
+      </div>
+
+      <!-- ===== BEACH OPTIONS ===== -->
+      <div class="options-section">
+        <h3>🏖️ Choose Your Beach / Club — 3 Options</h3>
+        <div class="option-cards">
+
+          <div class="option-card">
+            <span class="option-badge badge-free">🆓 Free</span>
+            <h4>🏖️ Option A — Chill Island (South Beach)</h4>
+            <div class="option-price">$0 · Included with cruise</div>
+            <p>Beautiful free beach with calm, shallow turquoise water — <strong>ideal for your toddler</strong>. Plenty of lounge chairs & umbrellas (first-come). Less crowded than the main areas. Grab a spot early!</p>
+            <ul class="option-pros">
+              <li>✅ Free lounge chairs</li>
+              <li>✅ Calm shallow water</li>
+              <li>✅ Less crowded</li>
+              <li>✅ Toddler perfect</li>
+              <li>⚠️ No food service — walk to food trucks</li>
+            </ul>
+          </div>
+
+          <div class="option-card recommended">
+            <span class="option-badge badge-pick">⭐ Our Pick</span>
+            <h4>🌴 Option B — Coco Beach Club</h4>
+            <div class="option-price">~$75–99/adult · Kids under 3 free</div>
+            <p>Premium open-air beach club with <strong>overwater cabanas, infinity pool, and pristine private beach</strong>. Includes lunch buffet, dedicated bar, and towel service. The infinity pool has a shallow kiddie section. <strong>Stunning for photos!</strong> 📸</p>
+            <ul class="option-pros">
+              <li>✅ Infinity pool + kiddie area</li>
+              <li>✅ Lunch buffet included</li>
+              <li>✅ Private calm beach</li>
+              <li>✅ Server brings drinks to you</li>
+              <li>✅ Overwater cabanas (extra $$)</li>
+              <li>📸 Most Instagrammable</li>
+            </ul>
+          </div>
+
+          <div class="option-card">
+            <span class="option-badge badge-splurge">💎 Splurge</span>
+            <h4>🛖 Option C — Overwater Cabana</h4>
+            <div class="option-price">~$350–600/day · Fits up to 8 people</div>
+            <p>The ultimate private experience — your own <strong>overwater bungalow with a slide into the ocean</strong>, hammock, private attendant, premium bar, and lunch included. A once-in-a-lifetime family memory. <strong>Split cost with another family = very doable!</strong></p>
+            <ul class="option-pros">
+              <li>✅ Private slide into ocean</li>
+              <li>✅ Personal attendant</li>
+              <li>✅ All food & drinks included</li>
+              <li>✅ Nap area for toddler</li>
+              <li>💡 Split with friends = ~$175/family</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== SNORKELING OPTIONS ===== -->
+      <div class="options-section">
+        <h3>🤿 Snorkeling Options — Take Turns!</h3>
+        <div class="option-cards">
+
+          <div class="option-card recommended">
+            <span class="option-badge badge-pick">⭐ Best Value</span>
+            <h4>🐠 Snorkel from South Beach (Free!)</h4>
+            <div class="option-price">$0 · Bring your own gear or rent ~$20</div>
+            <p>Wade out from the south end of Chill Island beach — there's a <strong>rocky reef area with colorful fish</strong> just 30–40 meters out. One parent snorkels while the other plays with the toddler in the shallows. Bring your own mask & snorkel for best value.</p>
+            <ul class="option-pros">
+              <li>✅ Free if you bring gear</li>
+              <li>✅ Steps from the beach</li>
+              <li>✅ Parrotfish, sergeant majors</li>
+              <li>⚠️ Visibility varies by tide</li>
+            </ul>
+          </div>
+
+          <div class="option-card">
+            <span class="option-badge badge-premium">🚤 Excursion</span>
+            <h4>🐢 Guided Snorkel Tour</h4>
+            <div class="option-price">~$55–75/adult · ~45 min boat ride + snorkeling</div>
+            <p>Boat trip to a <strong>pristine reef with sea turtles, rays, and vibrant coral</strong>. Much better visibility and marine life than shore snorkeling. One parent goes while the other stays on the beach — then swap on the next departure!</p>
+            <ul class="option-pros">
+              <li>✅ Sea turtles & rays</li>
+              <li>✅ Equipment included</li>
+              <li>✅ Multiple departures — swap parents</li>
+              <li>⚠️ ~2 hours total per parent</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== FOOD OPTIONS ===== -->
+      <div class="options-section">
+        <h3>🍽️ Food & Drinks — Where to Eat</h3>
+        <div class="option-cards">
+
+          <div class="option-card">
+            <span class="option-badge badge-free">🆓 Free</span>
+            <h4>🍔 Complimentary Food Spots</h4>
+            <div class="option-price">$0 · Included with cruise</div>
+            <p>Several <strong>free food areas</strong> across the island: <strong>Snack Shack</strong> (burgers, hot dogs, chicken), <strong>Chill Grill</strong> (jerk chicken, rice & beans, Caribbean BBQ). The food is solid and plentiful — no need to spend extra!</p>
+            <ul class="option-pros">
+              <li>✅ Burgers & hot dogs</li>
+              <li>✅ Jerk chicken & BBQ</li>
+              <li>✅ Ice cream station</li>
+              <li>✅ Multiple locations</li>
+            </ul>
+          </div>
+
+          <div class="option-card recommended">
+            <span class="option-badge badge-pick">⭐ Foodie Pick</span>
+            <h4>🥂 Coco Beach Club Buffet</h4>
+            <div class="option-price">Included with Beach Club pass (~$75–99)</div>
+            <p>A cut above — <strong>grilled lobster tails, fresh ceviche, tropical fruit platters, gourmet salads</strong>, and a full cocktail bar. The food alone almost justifies the Beach Club price. Eat with an ocean view from the open-air terrace. 🦞</p>
+            <ul class="option-pros">
+              <li>✅ Lobster & ceviche</li>
+              <li>✅ Dedicated cocktail bar</li>
+              <li>✅ Ocean-view seating</li>
+              <li>✅ Toddler-friendly options</li>
+            </ul>
+          </div>
+
+          <div class="option-card">
+            <span class="option-badge badge-premium">🍹 Extra</span>
+            <h4>🍹 Captain Jack's & Bars</h4>
+            <div class="option-price">$8–14 per drink · Beverage package works here!</div>
+            <p>Multiple bars across the island serve <strong>frozen cocktails, piña coladas, and local Bahamas beers</strong>. If you have the <strong>Royal Caribbean drink package, it works on the island!</strong> The Floating Bar at Oasis Lagoon is a must-visit.</p>
+            <ul class="option-pros">
+              <li>✅ Drink package works!</li>
+              <li>✅ Floating bar</li>
+              <li>✅ Piña coladas & rum punch</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== TIMELINE ===== -->
+      <div class="timeline cococay-timeline">
+
+        <div class="time-block visible">
+          <div class="time-dot-wrap"><div class="time-dot cococay-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cococay-label">7:00 – 8:00 AM</div>
+            <h3>🍳 Breakfast + Prep</h3>
+            <p>Full breakfast on board. <strong>Apply sunscreen, pack swim diapers, snacks & water.</strong> CocoCay tenders start early — line up by 7:45 to be first on the island and grab the best spots!</p>
+            <div class="tag-row">
+              <span class="tag tag-tip">🚢 Get in Tender Line Early!</span>
+              <span class="tag tag-food">🍌 Pack Toddler Snacks</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cococay-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cococay-label">8:30 – 9:00 AM</div>
+            <h3>🏝️ Arrive & Claim Your Spot</h3>
+            <p>Tender to island (~10 min). <strong>Head straight to your chosen beach area</strong> — South Beach for free, or check in at Coco Beach Club. Grab chairs under shade before they fill up. The island is stroller-friendly on main paths!</p>
+            <div class="tag-row">
+              <span class="tag tag-tip">🏃 Go Straight to Beach!</span>
+              <span class="tag tag-toddler">👶 Stroller-Friendly Paths</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cococay-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cococay-label">9:00 – 11:00 AM</div>
+            <h3>🏖️ Beach + Snorkeling Time</h3>
+            <p>Your toddler plays in the <strong>calm, knee-deep water</strong> (it stays shallow for 50+ feet!). Take turns snorkeling — one parent at a time. The water is warm, clear, and perfect. Build sandcastles, splash, collect shells! 🐚</p>
+            <div class="tag-row">
+              <span class="tag tag-toddler">👶 Ultra Shallow Water</span>
+              <span class="tag tag-relax">🤿 Take-Turns Snorkel</span>
+              <span class="tag tag-cool">🐚 Shell Collecting</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cococay-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cococay-label">11:00 AM – 12:00 PM</div>
+            <h3>🍽️ Lunch Time</h3>
+            <p>Hit the <strong>Chill Grill for free jerk chicken & BBQ</strong>, or enjoy the Beach Club buffet if you upgraded. The free food is genuinely good — don't overthink it! Your toddler will love the fruit and soft bread options.</p>
+            <div class="tag-row">
+              <span class="tag tag-food">🍗 Jerk Chicken</span>
+              <span class="tag tag-food">🦞 Beach Club Lobster</span>
+              <span class="tag tag-cost">💵 Free options available</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cococay-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cococay-label">12:00 – 1:30 PM</div>
+            <h3>😴 Toddler Nap + Explore</h3>
+            <p>Stroller nap under a shaded palapa or <strong>head back to the ship for cabin nap</strong> (tenders run all day!). While toddler naps with one parent, the other can explore — try the <strong>Oasis Lagoon</strong> (largest freshwater pool in the Caribbean!) or grab a drink at the Floating Bar. 🍹</p>
+            <div class="tag-row">
+              <span class="tag tag-toddler">😴 Nap Window</span>
+              <span class="tag tag-relax">🏊 Oasis Lagoon Pool</span>
+              <span class="tag tag-cool">🍹 Floating Bar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cococay-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cococay-label">1:30 – 3:00 PM</div>
+            <h3>🌊 Afternoon Beach Session</h3>
+            <p>After nap — back to the water! Afternoons are warmer and the <strong>island is less crowded</strong> as some guests return to the ship. Great time for more snorkeling, or just relaxing with your toes in the sand while your toddler splashes. Take family photos with the iconic blue water! 📸</p>
+            <div class="tag-row">
+              <span class="tag tag-relax">🏖️ Less Crowded!</span>
+              <span class="tag tag-toddler">👶 More Splash Time</span>
+              <span class="tag tag-cool">📸 Family Photos</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cococay-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cococay-label">3:00 – 3:30 PM</div>
+            <h3>🛍️ Island Shopping</h3>
+            <p>Browse the <strong>Straw Market</strong> for Bahamian crafts — straw bags, shell jewelry, handmade souvenirs. Pick up a little something as a CocoCay keepsake. The shops are shaded and air-conditioned — a nice break from the heat!</p>
+            <div class="tag-row">
+              <span class="tag tag-walk">🛍️ Straw Market</span>
+              <span class="tag tag-cool">❄️ Air-Conditioned!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cococay-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cococay-label">3:30 – 4:30 PM</div>
+            <h3>⛵ Tender Back to Ship</h3>
+            <p>Last tender is typically around <strong>4:30–5:00 PM</strong> — don't cut it close! Rinse off at the island showers, change your toddler, and enjoy the tender ride back. Watch the sunset from the ship deck tonight! 🌅</p>
+            <div class="tag-row">
+              <span class="tag tag-tip">⚠️ Don't Miss Last Tender!</span>
+              <span class="tag tag-relax">🌅 Sunset on Deck</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tips -->
+      <div class="collapsible open">
+        <div class="collapsible-header" onclick="toggleCollapse(this)">
+          <h3>💡 CocoCay Tips with a Toddler</h3>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="collapsible-body">
+          <ul class="tips-list">
+            <li><span class="bullet">🚤</span><span>CocoCay is a <strong>tender port</strong> — you take a small boat from the ship. Strollers are allowed but fold yours before boarding the tender.</span></li>
+            <li><span class="bullet">⏰</span><span><strong>Get in line early</strong> (7:30 AM) — first tenders mean best beach spots and no crowds.</span></li>
+            <li><span class="bullet">💧</span><span>Bring refillable water bottles — free water stations are spread across the island.</span></li>
+            <li><span class="bullet">🏊</span><span>The <strong>Oasis Lagoon</strong> freshwater pool is massive and has a shallow end for toddlers.</span></li>
+            <li><span class="bullet">👶</span><span>There are <strong>no changing facilities with baby tables</strong> — bring a portable changing pad in your bag.</span></li>
+            <li><span class="bullet">💵</span><span>Everything is charged to your <strong>SeaPass card</strong> — no cash needed on the island.</span></li>
+            <li><span class="bullet">📶</span><span>Ship WiFi doesn't work on the island — <strong>download offline entertainment</strong> for the toddler just in case.</span></li>
+            <li><span class="bullet">🧴</span><span>Reef-safe sunscreen only! The Bahamas requires it to protect coral reefs.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Pack Checklist -->
+      <div class="collapsible open">
+        <div class="collapsible-header" onclick="toggleCollapse(this)">
+          <h3>🎒 Packing Checklist</h3>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="collapsible-body">
+          <div class="pack-progress">
+            <span id="cococay-pack-text">0 / 12 packed</span>
+            <div class="pack-progress-bar"><div class="pack-progress-fill" id="cococay-pack-fill"></div></div>
+          </div>
+          <div class="pack-grid" id="cococay-checklist">
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>🩱 Baby swimsuit + swim diapers (3+)</div>
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>☀️ Reef-safe SPF 50</div>
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>👒 Sun hat + UV rash guard</div>
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>🤿 Snorkel mask (adults)</div>
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>🍌 Toddler snacks & pouches</div>
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>💧 Reusable water bottles</div>
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>🪣 Sand toys (bucket & shovel)</div>
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>🧸 Comfort toy + changing pad</div>
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>📷 Waterproof phone case</div>
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>👟 Water shoes (reef-safe)</div>
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>🦺 Toddler swim float/vest</div>
+            <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>🩹 Mini first aid kit</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
     <div class="footer">
       🚢 Star of the Seas · April 12–19, 2026 · Western Caribbean<br>
       Built with ❤️ for a family cruise adventure
@@ -783,7 +1147,7 @@
 
   <script>
     // ===== Tab Switching =====
-    let currentTab = 'costa';
+    let currentTab = 'cococay';
     function showTab(tab) {
       currentTab = tab;
       document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
