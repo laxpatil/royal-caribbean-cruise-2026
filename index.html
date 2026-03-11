@@ -175,6 +175,11 @@
       border-color: #00bcd4; color: white;
       box-shadow: 0 4px 20px rgba(0, 188, 212, 0.4);
     }
+    .tab-btn.active-travel {
+      background: linear-gradient(135deg, #7c4dff, #651fff);
+      border-color: #7c4dff; color: white;
+      box-shadow: 0 4px 20px rgba(124, 77, 255, 0.4);
+    }
 
     /* ===== Day Panel ===== */
     .day-panel {
@@ -201,6 +206,7 @@
     .roatan-banner { background: linear-gradient(135deg, #27ae60 0%, #16a085 50%, #1abc9c 100%); }
     .cococay-banner { background: linear-gradient(135deg, #e91e63 0%, #c2185b 50%, #ad1457 100%); }
     .cozumel-banner { background: linear-gradient(135deg, #00bcd4 0%, #0097a7 50%, #00838f 100%); }
+    .travel-banner { background: linear-gradient(135deg, #7c4dff 0%, #651fff 50%, #536dfe 100%); }
     .port-banner .port-icon { font-size: 3rem; z-index: 1; }
     .port-banner .port-info { z-index: 1; }
     .port-banner h2 { font-size: 1.5rem; font-weight: 900; }
@@ -249,6 +255,9 @@
     .timeline.cozumel-timeline::before {
       background: linear-gradient(180deg, #00bcd4, rgba(0,188,212,0.15));
     }
+    .timeline.travel-timeline::before {
+      background: linear-gradient(180deg, #7c4dff, rgba(124,77,255,0.15));
+    }
 
     .time-block {
       display: flex; gap: 16px; margin-bottom: 16px;
@@ -274,6 +283,7 @@
     .roatan-dot { border-color: var(--accent-roatan); }
     .cococay-dot { border-color: #e91e63; }
     .cozumel-dot { border-color: #00bcd4; }
+    .travel-dot { border-color: #7c4dff; }
     .time-block:hover .time-dot {
       transform: scale(1.3);
     }
@@ -281,6 +291,7 @@
     .time-block:hover .roatan-dot { box-shadow: 0 0 20px rgba(46,204,113,0.5); }
     .time-block:hover .cococay-dot { box-shadow: 0 0 20px rgba(233,30,99,0.5); }
     .time-block:hover .cozumel-dot { box-shadow: 0 0 20px rgba(0,188,212,0.5); }
+    .time-block:hover .travel-dot { box-shadow: 0 0 20px rgba(124,77,255,0.5); }
 
     .time-card {
       flex: 1;
@@ -304,6 +315,7 @@
     .roatan-label { color: var(--accent-roatan); }
     .cococay-label { color: #e91e63; }
     .cozumel-label { color: #00bcd4; }
+    .travel-label { color: #b388ff; }
     .time-card h3 { font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 7px; }
     .time-card p { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; }
     .time-card strong { color: var(--text-primary); }
@@ -361,6 +373,26 @@
       font-size: 0.72rem; padding: 3px 10px; border-radius: 12px;
       background: rgba(255,255,255,0.06); color: var(--text-secondary);
     }
+
+    /* ===== Info Cards (Confirmation Codes) ===== */
+    .info-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .info-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 16px; padding: 16px 18px;
+      backdrop-filter: blur(12px); display: flex; align-items: center; gap: 14px;
+      transition: all 0.3s;
+    }
+    .info-card:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+    .info-card .info-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .info-card .info-details { flex: 1; }
+    .info-card .info-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-secondary); }
+    .info-card .info-value {
+      font-size: 1.1rem; font-weight: 900; color: #b388ff;
+      font-family: 'Courier New', monospace; letter-spacing: 2px; margin-top: 2px;
+    }
+    .info-card .info-sub { font-size: 0.78rem; color: var(--text-secondary); margin-top: 2px; }
+    .tag-flight { background: rgba(124,77,255,0.15); color: #b388ff; border-color: rgba(124,77,255,0.25); }
+    .tag-car { background: rgba(255,152,0,0.15); color: #ffb74d; border-color: rgba(255,152,0,0.25); }
 
     /* ===== Collapsible Sections ===== */
     .collapsible {
@@ -459,6 +491,7 @@
     .scroll-progress.roatan-progress { background: linear-gradient(90deg, #2ecc71, #3498db); }
     .scroll-progress.cococay-progress { background: linear-gradient(90deg, #e91e63, #ff5252); }
     .scroll-progress.cozumel-progress { background: linear-gradient(90deg, #00bcd4, #26c6da); }
+    .scroll-progress.travel-progress { background: linear-gradient(90deg, #7c4dff, #b388ff); }
 
     /* ===== Back to Top ===== */
     .back-to-top {
@@ -476,6 +509,7 @@
     .back-to-top.roatan-top { background: linear-gradient(135deg, var(--accent-roatan), var(--accent-roatan-dark)); box-shadow: 0 4px 16px rgba(46,204,113,0.4); }
     .back-to-top.cococay-top { background: linear-gradient(135deg, #e91e63, #c2185b); box-shadow: 0 4px 16px rgba(233,30,99,0.4); }
     .back-to-top.cozumel-top { background: linear-gradient(135deg, #00bcd4, #0097a7); box-shadow: 0 4px 16px rgba(0,188,212,0.4); }
+    .back-to-top.travel-top { background: linear-gradient(135deg, #7c4dff, #651fff); box-shadow: 0 4px 16px rgba(124,77,255,0.4); }
   </style>
 </head>
 <body>
@@ -487,10 +521,10 @@
   <div class="particles" id="particles"></div>
 
   <!-- Scroll Progress -->
-  <div class="scroll-progress cococay-progress" id="scrollProgress" style="width: 0%"></div>
+  <div class="scroll-progress travel-progress" id="scrollProgress" style="width: 0%"></div>
 
   <!-- Back to Top -->
-  <button class="back-to-top cococay-top" id="backToTop" onclick="window.scrollTo({top:0})">↑</button>
+  <button class="back-to-top travel-top" id="backToTop" onclick="window.scrollTo({top:0})">↑</button>
 
   <div class="container">
 
@@ -511,10 +545,286 @@
 
     <!-- Tabs -->
     <div class="tabs">
-      <button class="tab-btn active-cococay" id="tab-cococay" onclick="showTab('cococay')">🏝️ CocoCay</button>
+      <button class="tab-btn active-travel" id="tab-travel" onclick="showTab('travel')">✈️ Travel</button>
+      <button class="tab-btn" id="tab-cococay" onclick="showTab('cococay')">🏝️ CocoCay</button>
       <button class="tab-btn" id="tab-cozumel" onclick="showTab('cozumel')">🇲🇽 Cozumel</button>
       <button class="tab-btn" id="tab-costa" onclick="showTab('costa')">🇲🇽 Costa Maya</button>
       <button class="tab-btn" id="tab-roatan" onclick="showTab('roatan')">🇭🇳 Roatán</button>
+    </div>
+
+    <!-- ==================== TRAVEL ==================== -->
+    <div class="day-panel active" id="travel">
+
+      <div class="port-banner travel-banner">
+        <div class="port-icon">✈️</div>
+        <div class="port-info">
+          <h2>Travel & Logistics</h2>
+          <p class="port-sub">Flights · Car Rental · Getting to Port Canaveral</p>
+          <div class="weather-badge">📋 All confirmations & timings in one place</div>
+        </div>
+      </div>
+
+      <!-- Confirmation Cards -->
+      <div class="info-cards">
+        <div class="info-card">
+          <div class="info-icon">✈️</div>
+          <div class="info-details">
+            <div class="info-label">Southwest Airlines — Confirmation</div>
+            <div class="info-value">AYLD5A</div>
+            <div class="info-sub">4 flights · Seattle → Chicago → Orlando · Orlando → Phoenix → Seattle</div>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">🚗</div>
+          <div class="info-details">
+            <div class="info-label">Avis Car Rental — Confirmation</div>
+            <div class="info-value">08401756US6</div>
+            <div class="info-sub">Full Size · Apr 11, 1:00 PM → Apr 12, 1:00 PM · Orlando Airport → Port Canaveral</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== OUTBOUND FLIGHTS ===== -->
+      <div class="timeline travel-timeline">
+
+        <div class="time-block visible">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label travel-label">FRI, APRIL 10 · 11:55 PM</div>
+            <h3>✈️ Flight 1 — Seattle → Chicago Midway</h3>
+            <p><strong>WN 4198</strong> · Departs SEA 11:55 PM → Arrives MDW 5:55 AM (Sat, Apr 11)<br>Duration: <strong>4 hours</strong> · Red-eye flight</p>
+            <div class="tag-row">
+              <span class="tag tag-flight">✈️ WN 4198</span>
+              <span class="tag tag-tip">🌙 Red-Eye — Toddler should sleep!</span>
+              <span class="tag tag-toddler">👶 Pack milk + blanket for flight</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label travel-label">SAT, APRIL 11 · 5:55 AM — LAYOVER</div>
+            <h3>⏳ Chicago Midway — 3.5 Hour Layover</h3>
+            <p>Arrive at <strong>5:55 AM</strong>, next flight at <strong>9:20 AM</strong>. Grab breakfast, let the toddler stretch, and freshen up. Midway has family restrooms near all gates. <strong>Don't sleep through the layover!</strong> ☕</p>
+            <div class="tag-row">
+              <span class="tag tag-food">☕ Grab Breakfast</span>
+              <span class="tag tag-toddler">👶 Stretch & Play</span>
+              <span class="tag tag-tip">⏰ 3h 25min layover</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label travel-label">SAT, APRIL 11 · 9:20 AM</div>
+            <h3>✈️ Flight 2 — Chicago → Orlando</h3>
+            <p><strong>WN 468</strong> · Departs MDW 9:20 AM → Arrives MCO 12:55 PM<br>Duration: <strong>2h 35min</strong></p>
+            <div class="tag-row">
+              <span class="tag tag-flight">✈️ WN 468</span>
+              <span class="tag tag-toddler">👶 Snacks + iPad loaded!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label travel-label">SAT, APRIL 11 · 1:00 PM</div>
+            <h3>🚗 Pick Up Rental Car — Orlando Airport</h3>
+            <p><strong>Avis · Full Size</strong> · Pick up at <strong>MCO at 1:00 PM</strong>. Head to the Avis counter at the airport rental car center (take the automated tram from terminals). <strong>Don't forget your car seat for the toddler!</strong></p>
+            <div class="tag-row">
+              <span class="tag tag-car">🚗 Avis — Full Size</span>
+              <span class="tag tag-tip">⚠️ Bring Toddler Car Seat!</span>
+              <span class="tag tag-cost">💵 Conf: 08401756US6</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label travel-label">SAT, APRIL 11 · 1:30 – 2:30 PM</div>
+            <h3>🚗 Drive to Port Canaveral Area</h3>
+            <p><strong>~50 min drive</strong> from Orlando Airport to Port Canaveral. Take SR-528 East (Beachline Expressway — tolls ~$3). Consider stopping for <strong>groceries/snacks</strong> on the way. Check into a hotel near the port for a good night's sleep before boarding!</p>
+            <div class="tag-row">
+              <span class="tag tag-tip">🛣️ ~50 min via SR-528</span>
+              <span class="tag tag-food">🛒 Stop for Snacks</span>
+              <span class="tag tag-cost">💵 ~$3 tolls</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label travel-label">SAT, APRIL 11 · EVENING</div>
+            <h3>🏨 Hotel Night — Port Canaveral</h3>
+            <p>Rest up before the big day! Get the toddler to bed early. <strong>Pack your cruise bags tonight</strong> — you'll want to be organized in the morning. Set an alarm!</p>
+            <div class="tag-row">
+              <span class="tag tag-tip">🧳 Pack Tonight!</span>
+              <span class="tag tag-toddler">😴 Early Bedtime</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card" style="border-color: rgba(124,77,255,0.3); background: rgba(124,77,255,0.08);">
+            <div class="time-label travel-label">SUN, APRIL 12 · 1:00 PM</div>
+            <h3>🚗 Drop Off Rental Car → 🚢 Board the Ship!</h3>
+            <p>Return the Avis car at <strong>Port Canaveral Shuttle Service by 1:00 PM</strong>. Head to the <strong>Star of the Seas cruise terminal</strong>. Boarding typically opens <strong>12:00–1:00 PM</strong>. Sail away at <strong>4:00 PM</strong>! 🎉🚢</p>
+            <div class="tag-row">
+              <span class="tag tag-car">🚗 Return Car by 1 PM</span>
+              <span class="tag tag-tip">🚢 Boarding 12–1 PM</span>
+              <span class="tag tag-cool">🎉 CRUISE TIME!</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Divider -->
+      <div style="text-align:center; margin: 28px 0 20px; color: var(--text-secondary); font-size: 0.85rem;">
+        🚢 ─── <strong>CRUISE: APRIL 12–19</strong> ─── 🚢
+      </div>
+
+      <!-- ===== RETURN FLIGHTS ===== -->
+      <div class="timeline travel-timeline">
+
+        <div class="time-block visible">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label travel-label">SUN, APRIL 19 · MORNING</div>
+            <h3>🚢 Disembark in Orlando</h3>
+            <p>Ship arrives back at Port Canaveral early morning. <strong>Disembark by ~9:00–10:00 AM.</strong> Take a shuttle/Uber to <strong>Orlando Airport (MCO)</strong> — about 50 min. You have time — your flight isn't until 7:30 PM!</p>
+            <div class="tag-row">
+              <span class="tag tag-tip">🚢 Off by ~10 AM</span>
+              <span class="tag tag-tip">🚕 Uber/shuttle to MCO ~$40–50</span>
+              <span class="tag tag-cool">⏰ 9+ hrs before flight</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label travel-label">SUN, APRIL 19 · AFTERNOON</div>
+            <h3>🌴 Free Time in Orlando!</h3>
+            <p>With 9+ hours before your flight, you could: <strong>Visit Disney Springs</strong> (free entry, shops & dining), explore a park, or just relax at a restaurant near the airport. Let the toddler burn energy before the flights home!</p>
+            <div class="tag-row">
+              <span class="tag tag-walk">🏰 Disney Springs?</span>
+              <span class="tag tag-food">🍽️ Last Florida meal</span>
+              <span class="tag tag-toddler">👶 Burn off energy!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label travel-label">SUN, APRIL 19 · 7:30 PM</div>
+            <h3>✈️ Flight 3 — Orlando → Phoenix</h3>
+            <p><strong>WN 1498</strong> · Departs MCO 7:30 PM → Arrives PHX 9:15 PM<br>Duration: <strong>3h 45min</strong> · Toddler bedtime in flight — pack the sleep essentials!</p>
+            <div class="tag-row">
+              <span class="tag tag-flight">✈️ WN 1498</span>
+              <span class="tag tag-toddler">😴 Bedtime flight — PJs on!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label travel-label">SUN, APRIL 19 · 9:15 PM — LAYOVER</div>
+            <h3>⏳ Phoenix — 1h 40min Layover</h3>
+            <p>Quick connection in Phoenix. <strong>Stay near your gate</strong> — this is a tight-ish layover with a sleeping toddler. Gate change is possible — check the monitors!</p>
+            <div class="tag-row">
+              <span class="tag tag-tip">⚡ Quick Connection!</span>
+              <span class="tag tag-tip">📺 Check Gate Monitors</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label travel-label">SUN, APRIL 19 · 10:55 PM</div>
+            <h3>✈️ Flight 4 — Phoenix → Seattle</h3>
+            <p><strong>WN 1065</strong> · Departs PHX 10:55 PM → Arrives SEA 1:55 AM (Mon, Apr 20)<br>Duration: <strong>3 hours</strong> · Late night — everyone should sleep! 😴</p>
+            <div class="tag-row">
+              <span class="tag tag-flight">✈️ WN 1065</span>
+              <span class="tag tag-toddler">😴 Sleep flight — home stretch!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot travel-dot"></div></div>
+          <div class="time-card" style="border-color: rgba(124,77,255,0.3); background: rgba(124,77,255,0.08);">
+            <div class="time-label travel-label">MON, APRIL 20 · 1:55 AM</div>
+            <h3>🏠 Home Sweet Home — Seattle!</h3>
+            <p>Welcome back! Grab your bags and head home. <strong>You did it</strong> — a full Caribbean cruise with a toddler! 🎉 Time to sleep in your own bed. Unpack tomorrow. 😄</p>
+            <div class="tag-row">
+              <span class="tag tag-relax">🏠 HOME!</span>
+              <span class="tag tag-cool">🎉 What a Trip!</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tips -->
+      <div class="collapsible open">
+        <div class="collapsible-header" onclick="toggleCollapse(this)">
+          <h3>💡 Travel Tips with a Toddler</h3>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="collapsible-body">
+          <ul class="tips-list">
+            <li><span class="bullet">🪑</span><span><strong>Car seat:</strong> Bring your own car seat for the rental car. Gate-check it on Southwest flights (free!).</span></li>
+            <li><span class="bullet">✈️</span><span><strong>Southwest seating:</strong> Board during Family Boarding (between A & B groups) for the best seats together.</span></li>
+            <li><span class="bullet">👂</span><span>Give toddler a <strong>bottle or pacifier during takeoff/landing</strong> — helps with ear pressure.</span></li>
+            <li><span class="bullet">🎒</span><span>Pack a <strong>flight survival bag:</strong> snacks, milk, diapers, wipes, change of clothes, 2–3 small new toys, tablet with downloaded shows.</span></li>
+            <li><span class="bullet">🧳</span><span>Southwest allows <strong>2 free checked bags</strong> per person — pack generously!</span></li>
+            <li><span class="bullet">🚗</span><span>The <strong>Avis rental car center at MCO</strong> is connected by a free tram from the main terminal.</span></li>
+            <li><span class="bullet">🛣️</span><span>Port Canaveral is ~50 min from MCO via <strong>SR-528 (Beachline Expressway)</strong> — bring cash/SunPass for tolls.</span></li>
+            <li><span class="bullet">📱</span><span>Download the <strong>Royal Caribbean app</strong> before boarding — you'll need it for check-in, dining, and schedules.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Pack Checklist -->
+      <div class="collapsible open">
+        <div class="collapsible-header" onclick="toggleCollapse(this)">
+          <h3>🎒 Travel Day Essentials</h3>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="collapsible-body">
+          <div class="pack-progress">
+            <span id="travel-pack-text">0 / 14 packed</span>
+            <div class="pack-progress-bar"><div class="pack-progress-fill" id="travel-pack-fill"></div></div>
+          </div>
+          <div class="pack-grid" id="travel-checklist">
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>🪑 Toddler car seat (gate-check)</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>🧳 2 checked bags packed</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>🎒 Carry-on diaper bag</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>🍼 Milk + bottles + snacks</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>📱 Tablet + headphones (downloaded)</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>🧸 2–3 small new toys</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>👶 Extra outfit (blowout backup!)</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>🧷 Diapers + wipes (10+ for flights)</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>📄 Passports / IDs / birth certificate</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>📱 RC App downloaded + checked in</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>💳 Credit cards + small bills</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>🚗 Avis confirmation printed/saved</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>🧴 Sunscreen + meds in carry-on</div>
+            <div class="pack-item" onclick="togglePack(this,'travel')"><div class="pack-check"></div>🔌 Chargers + power bank</div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- ==================== COSTA MAYA ==================== -->
@@ -1125,7 +1435,7 @@
     </div>
 
     <!-- ==================== COCOCAY ==================== -->
-    <div class="day-panel active" id="cococay">
+    <div class="day-panel" id="cococay">
 
       <div class="port-banner cococay-banner">
         <div class="port-icon">🏝️</div>
@@ -1800,7 +2110,7 @@
 
   <script>
     // ===== Tab Switching =====
-    let currentTab = 'cococay';
+    let currentTab = 'travel';
     function showTab(tab) {
       currentTab = tab;
       document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
