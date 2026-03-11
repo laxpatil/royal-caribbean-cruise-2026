@@ -4,7 +4,7 @@
 
 ### *Your Caribbean Cruise • April 12–19 • With a Toddler* 👶🌊
 
-[![GitHub Pages](https://img.shields.io/badge/🌐_Live_Site-GitHub_Pages-blue?style=for-the-badge)](https://pages.github.pie.apple.com/lpatil/cruise-planner/)
+[![GitHub Pages](https://img.shields.io/badge/🌐_Live_Site-GitHub_Pages-blue?style=for-the-badge)](https://pages.github.pie.apple.com/lpatil/royal-caribbean-cruise-2026/)
 [![Made with Love](https://img.shields.io/badge/Made_with-❤️-red?style=for-the-badge)]()
 [![Toddler Friendly](https://img.shields.io/badge/Toddler-Friendly_👶-pink?style=for-the-badge)]()
 
@@ -12,7 +12,7 @@
 
 **An interactive, mobile-friendly day planner for a Caribbean cruise with a 16-month-old toddler.**
 
-### 🔗 [**Open Live Planner →**](https://pages.github.pie.apple.com/lpatil/cruise-planner/)
+### 🔗 [**Open Live Planner →**](https://pages.github.pie.apple.com/lpatil/royal-caribbean-cruise-2026/)
 
 ---
 
@@ -54,8 +54,8 @@ Simply open the [**live site**](https://pages.github.pie.apple.com/lpatil/cruise
 Or clone and open locally:
 
 ```bash
-git clone https://github.pie.apple.com/lpatil/cruise-planner.git
-open cruise-planner/index.html
+git clone https://github.pie.apple.com/lpatil/royal-caribbean-cruise-2026.git
+open royal-caribbean-cruise-2026/index.html
 ```
 
 ## 👶 Toddler Travel Tips
