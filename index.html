@@ -170,6 +170,11 @@
       border-color: #e91e63; color: white;
       box-shadow: 0 4px 20px rgba(233, 30, 99, 0.4);
     }
+    .tab-btn.active-cozumel {
+      background: linear-gradient(135deg, #00bcd4, #0097a7);
+      border-color: #00bcd4; color: white;
+      box-shadow: 0 4px 20px rgba(0, 188, 212, 0.4);
+    }
 
     /* ===== Day Panel ===== */
     .day-panel {
@@ -195,6 +200,7 @@
     .costa-banner { background: linear-gradient(135deg, #e67e22 0%, #d35400 50%, #c0392b 100%); }
     .roatan-banner { background: linear-gradient(135deg, #27ae60 0%, #16a085 50%, #1abc9c 100%); }
     .cococay-banner { background: linear-gradient(135deg, #e91e63 0%, #c2185b 50%, #ad1457 100%); }
+    .cozumel-banner { background: linear-gradient(135deg, #00bcd4 0%, #0097a7 50%, #00838f 100%); }
     .port-banner .port-icon { font-size: 3rem; z-index: 1; }
     .port-banner .port-info { z-index: 1; }
     .port-banner h2 { font-size: 1.5rem; font-weight: 900; }
@@ -223,6 +229,7 @@
     .budget-fill-costa { background: linear-gradient(90deg, #f39c12, #e74c3c); }
     .budget-fill-roatan { background: linear-gradient(90deg, #2ecc71, #3498db); }
     .budget-fill-cococay { background: linear-gradient(90deg, #e91e63, #ff5252); }
+    .budget-fill-cozumel { background: linear-gradient(90deg, #00bcd4, #26c6da); }
 
     /* ===== Timeline ===== */
     .timeline { position: relative; padding-left: 0; }
@@ -238,6 +245,9 @@
     }
     .timeline.cococay-timeline::before {
       background: linear-gradient(180deg, #e91e63, rgba(233,30,99,0.15));
+    }
+    .timeline.cozumel-timeline::before {
+      background: linear-gradient(180deg, #00bcd4, rgba(0,188,212,0.15));
     }
 
     .time-block {
@@ -263,12 +273,14 @@
     .costa-dot { border-color: var(--accent-costa); }
     .roatan-dot { border-color: var(--accent-roatan); }
     .cococay-dot { border-color: #e91e63; }
+    .cozumel-dot { border-color: #00bcd4; }
     .time-block:hover .time-dot {
       transform: scale(1.3);
     }
     .time-block:hover .costa-dot { box-shadow: 0 0 20px rgba(243,156,18,0.5); }
     .time-block:hover .roatan-dot { box-shadow: 0 0 20px rgba(46,204,113,0.5); }
     .time-block:hover .cococay-dot { box-shadow: 0 0 20px rgba(233,30,99,0.5); }
+    .time-block:hover .cozumel-dot { box-shadow: 0 0 20px rgba(0,188,212,0.5); }
 
     .time-card {
       flex: 1;
@@ -291,6 +303,7 @@
     .costa-label { color: var(--accent-costa); }
     .roatan-label { color: var(--accent-roatan); }
     .cococay-label { color: #e91e63; }
+    .cozumel-label { color: #00bcd4; }
     .time-card h3 { font-size: 1.05rem; font-weight: 800; color: white; margin-bottom: 7px; }
     .time-card p { font-size: 0.84rem; color: var(--text-secondary); line-height: 1.6; }
     .time-card strong { color: var(--text-primary); }
@@ -445,6 +458,7 @@
     .scroll-progress.costa-progress { background: linear-gradient(90deg, #f39c12, #e74c3c); }
     .scroll-progress.roatan-progress { background: linear-gradient(90deg, #2ecc71, #3498db); }
     .scroll-progress.cococay-progress { background: linear-gradient(90deg, #e91e63, #ff5252); }
+    .scroll-progress.cozumel-progress { background: linear-gradient(90deg, #00bcd4, #26c6da); }
 
     /* ===== Back to Top ===== */
     .back-to-top {
@@ -461,6 +475,7 @@
     .back-to-top.costa-top { background: linear-gradient(135deg, var(--accent-costa), var(--accent-costa-dark)); box-shadow: 0 4px 16px rgba(243,156,18,0.4); }
     .back-to-top.roatan-top { background: linear-gradient(135deg, var(--accent-roatan), var(--accent-roatan-dark)); box-shadow: 0 4px 16px rgba(46,204,113,0.4); }
     .back-to-top.cococay-top { background: linear-gradient(135deg, #e91e63, #c2185b); box-shadow: 0 4px 16px rgba(233,30,99,0.4); }
+    .back-to-top.cozumel-top { background: linear-gradient(135deg, #00bcd4, #0097a7); box-shadow: 0 4px 16px rgba(0,188,212,0.4); }
   </style>
 </head>
 <body>
@@ -497,6 +512,7 @@
     <!-- Tabs -->
     <div class="tabs">
       <button class="tab-btn active-cococay" id="tab-cococay" onclick="showTab('cococay')">🏝️ CocoCay</button>
+      <button class="tab-btn" id="tab-cozumel" onclick="showTab('cozumel')">🇲🇽 Cozumel</button>
       <button class="tab-btn" id="tab-costa" onclick="showTab('costa')">🇲🇽 Costa Maya</button>
       <button class="tab-btn" id="tab-roatan" onclick="showTab('roatan')">🇭🇳 Roatán</button>
     </div>
@@ -1132,6 +1148,357 @@
             <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>👟 Water shoes (reef-safe)</div>
             <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>🦺 Toddler swim float/vest</div>
             <div class="pack-item" onclick="togglePack(this,'cococay')"><div class="pack-check"></div>🩹 Mini first aid kit</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================== COZUMEL ==================== -->
+    <div class="day-panel" id="cozumel">
+
+      <div class="port-banner cozumel-banner">
+        <div class="port-icon">🤿</div>
+        <div class="port-info">
+          <h2>Cozumel, Mexico</h2>
+          <p class="port-sub">Day 4 — Wed, April 15 · World-Class Reefs · 10 Hours Ashore!</p>
+          <div class="weather-badge">☀️ ~31°C / 88°F &nbsp;·&nbsp; Sunny & Warm</div>
+        </div>
+      </div>
+
+      <div class="budget-bar">
+        <div class="budget-icon">💰</div>
+        <div class="budget-info">
+          <div class="budget-label">Estimated Budget</div>
+          <div class="budget-amount">$40 – $180 USD</div>
+          <div class="budget-detail">Beach club + Snorkeling + Food + Taxi · See options below</div>
+        </div>
+        <div class="budget-progress"><div class="budget-fill budget-fill-cozumel" style="width: 50%"></div></div>
+      </div>
+
+      <!-- ===== BEACH CLUB OPTIONS ===== -->
+      <div class="options-section">
+        <h3>🏖️ Choose Your Beach Club — 4 Options</h3>
+        <div class="option-cards">
+
+          <div class="option-card">
+            <span class="option-badge badge-free">🆓 Free Entry</span>
+            <h4>🐠 Option A — Money Bar Beach Club</h4>
+            <div class="option-price">$0 entry · Pay for food & drinks · Snorkel gear ~$15</div>
+            <p>A local favorite with <strong>one of the best shore-snorkeling reefs in Cozumel</strong> right off the beach! Free entry, just buy food/drinks. Rocky entry (wear water shoes), but the reef is <strong>spectacular</strong> — sea fans, parrotfish, angelfish, maybe even a sea turtle. 🐢</p>
+            <ul class="option-pros">
+              <li>✅ Free entry</li>
+              <li>✅ Best shore snorkeling</li>
+              <li>✅ Sea turtles possible</li>
+              <li>✅ Good tacos & ceviche</li>
+              <li>⚠️ Rocky entry — water shoes needed</li>
+              <li>⚠️ Not the best toddler beach</li>
+            </ul>
+          </div>
+
+          <div class="option-card recommended">
+            <span class="option-badge badge-pick">⭐ Our Pick</span>
+            <h4>🌴 Option B — Mr. Sanchos Beach Club</h4>
+            <div class="option-price">$0 entry · All-inclusive available ~$55/adult · Kids under 4 free</div>
+            <p>The <strong>#1 rated beach club in Cozumel</strong>. Beautiful white sand, calm water, and an <strong>all-inclusive option</strong> with unlimited food (tacos, ceviche, grilled fish, guac) + open bar. Lounge chairs, palapas, and a pool included. The <strong>shallow, calm water is perfect for your toddler</strong>. Absolute paradise! 🌴</p>
+            <ul class="option-pros">
+              <li>✅ All-inclusive food & drinks</li>
+              <li>✅ Sandy calm beach — toddler safe</li>
+              <li>✅ Pool + lounge chairs</li>
+              <li>✅ Kids under 4 free!</li>
+              <li>✅ Massages available ($)</li>
+              <li>📸 Gorgeous for photos</li>
+            </ul>
+          </div>
+
+          <div class="option-card">
+            <span class="option-badge badge-premium">🎢 Family Fun</span>
+            <h4>🎪 Option C — Playa Mia Grand Beach Park</h4>
+            <div class="option-price">~$55–65/adult · Kids under 3 free · All-inclusive</div>
+            <p>A full <strong>beach + water park combo</strong> — floating water toys, slides, kayaks, and a dedicated <strong>kids' area with shallow pool</strong>. All-inclusive food & drinks. The most <strong>activity-packed</strong> option. Great if you want variety beyond just the beach. Not as serene as Mr. Sanchos but more to do.</p>
+            <ul class="option-pros">
+              <li>✅ Water park + floats</li>
+              <li>✅ All-inclusive food & bar</li>
+              <li>✅ Kids splash zone</li>
+              <li>✅ Kayaks & snorkeling</li>
+              <li>⚠️ Can get crowded on ship days</li>
+            </ul>
+          </div>
+
+          <div class="option-card">
+            <span class="option-badge badge-splurge">💎 Exclusive</span>
+            <h4>🥂 Option D — Nachi Cocom</h4>
+            <div class="option-price">~$55/adult all-inclusive · Max 130 guests/day · Kids under 4 free</div>
+            <p><strong>Limited to 130 guests daily</strong> — this is the most exclusive and peaceful option. All-inclusive with <strong>premium food (lobster available!), top-shelf bar, and pristine beach</strong>. Never crowded. Feels like your own private resort. <strong>Book in advance — sells out!</strong></p>
+            <ul class="option-pros">
+              <li>✅ Max 130 guests — never crowded</li>
+              <li>✅ Premium food & lobster</li>
+              <li>✅ Top-shelf open bar</li>
+              <li>✅ Serene & peaceful</li>
+              <li>⚠️ Must pre-book online</li>
+              <li>💡 Best for relaxation</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== SNORKELING OPTIONS ===== -->
+      <div class="options-section">
+        <h3>🤿 Snorkeling — Cozumel's #1 Activity!</h3>
+        <div class="option-cards">
+
+          <div class="option-card">
+            <span class="option-badge badge-free">🏖️ Shore</span>
+            <h4>🐠 Shore Snorkel at Money Bar / Dzul Ha</h4>
+            <div class="option-price">Free (bring gear) or rent ~$15–20</div>
+            <p>Walk right in from the shore at <strong>Money Bar or Dzul Ha reef</strong>. Colorful coral, sea fans, parrotfish, and sergeant majors. One parent snorkels while the other watches the toddler. <strong>Wear water shoes</strong> — the entry is rocky ironshore.</p>
+            <ul class="option-pros">
+              <li>✅ Free / cheap</li>
+              <li>✅ Abundant marine life</li>
+              <li>✅ 2 mins from beach</li>
+              <li>⚠️ Rocky entry</li>
+            </ul>
+          </div>
+
+          <div class="option-card recommended">
+            <span class="option-badge badge-pick">⭐ Must-Do</span>
+            <h4>⭐ El Cielo Sandbar — Starfish Paradise!</h4>
+            <div class="option-price">~$50–70/adult · Boat tour ~3 hrs · Toddlers usually free</div>
+            <p>A <strong>magical shallow sandbar with dozens of starfish</strong> in crystal-clear waist-deep water. Your toddler can stand and see starfish! The boat also stops at <strong>2 reef snorkel spots</strong> (Colombia & Palancar) with sea turtles, rays, and vibrant coral. <strong>THE iconic Cozumel experience.</strong> One parent stays on the boat with toddler at deep reef stops. 🌟</p>
+            <ul class="option-pros">
+              <li>✅ Starfish in shallow water!</li>
+              <li>✅ Toddler can stand & see them</li>
+              <li>✅ 2 reef snorkel stops</li>
+              <li>✅ Sea turtles & rays</li>
+              <li>✅ Drinks usually included</li>
+              <li>📸 Unreal photos</li>
+            </ul>
+          </div>
+
+          <div class="option-card">
+            <span class="option-badge badge-premium">🏛️ Park</span>
+            <h4>🌿 Chankanaab National Park</h4>
+            <div class="option-price">~$21/adult entry · All-inclusive upgrade ~$55 · Kids under 3 free</div>
+            <p>Beautiful eco-park with <strong>beach snorkeling, botanical gardens, sea lion show, and a Mayan replica village</strong>. Calm beach + clear water for snorkeling right off shore. A great <strong>mix of exploring + snorkeling + nature</strong>. Toddler-friendly paths throughout.</p>
+            <ul class="option-pros">
+              <li>✅ Snorkeling + gardens + sea lions</li>
+              <li>✅ Calm sandy beach</li>
+              <li>✅ Mayan village to explore</li>
+              <li>✅ Stroller-friendly paths</li>
+              <li>✅ All-in-one experience</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== FOOD OPTIONS ===== -->
+      <div class="options-section">
+        <h3>🍽️ Food — Cozumel is a Foodie Paradise!</h3>
+        <div class="option-cards">
+
+          <div class="option-card recommended">
+            <span class="option-badge badge-pick">⭐ Foodie Pick</span>
+            <h4>🌮 San Miguel Town — Street Food Walk</h4>
+            <div class="option-price">$5–20 per person · Walking distance from cruise port</div>
+            <p>The cruise port drops you right in <strong>San Miguel town</strong>. Walk the waterfront Malecón and explore: <strong>fresh ceviche stands, taco al pastor carts, churros, marquesitas</strong> (Yucatecan crepes with Nutella & cheese!). Try <strong>La Cocay</strong> for upscale Mexican, or <strong>Taquería El Sitio</strong> for authentic local tacos. The town square has live music and a vibrant market!</p>
+            <ul class="option-pros">
+              <li>✅ Walk from cruise port</li>
+              <li>✅ Authentic tacos al pastor</li>
+              <li>✅ Marquesitas (must try!)</li>
+              <li>✅ Fresh ceviche stands</li>
+              <li>✅ Live music at the plaza</li>
+            </ul>
+          </div>
+
+          <div class="option-card">
+            <span class="option-badge badge-premium">🦞 Upscale</span>
+            <h4>🥂 Buccanos at Night / La Monina</h4>
+            <div class="option-price">$25–50 per person</div>
+            <p><strong>Buccanos</strong> is a stunning beachfront restaurant with gourmet ceviches, tuna tataki, and craft cocktails — <strong>the best restaurant in Cozumel</strong>. <strong>La Monina</strong> in town does incredible Yucatecan cuisine (cochinita pibil, papadzules). Both are family-friendly with highchairs available.</p>
+            <ul class="option-pros">
+              <li>✅ Gourmet Mexican cuisine</li>
+              <li>✅ Oceanfront dining</li>
+              <li>✅ Cochinita pibil 🤤</li>
+              <li>✅ Highchairs available</li>
+            </ul>
+          </div>
+
+          <div class="option-card">
+            <span class="option-badge badge-free">🍔 Included</span>
+            <h4>🌴 Beach Club All-Inclusive</h4>
+            <div class="option-price">Included with all-inclusive pass (~$55)</div>
+            <p>If you go all-inclusive at <strong>Mr. Sanchos, Nachi Cocom, or Playa Mia</strong> — you get unlimited food: tacos, guacamole, grilled fish, ceviche, rice & beans, desserts, plus open bar with margaritas, piña coladas, and Mexican beer all day. 🍹</p>
+            <ul class="option-pros">
+              <li>✅ Unlimited food & drinks</li>
+              <li>✅ Tacos, ceviche, grilled fish</li>
+              <li>✅ Open bar all day</li>
+              <li>✅ No decision fatigue</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== TIMELINE ===== -->
+      <div class="timeline cozumel-timeline">
+
+        <div class="time-block visible">
+          <div class="time-dot-wrap"><div class="time-dot cozumel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cozumel-label">7:00 – 8:00 AM</div>
+            <h3>🍳 Breakfast + Sunscreen Up</h3>
+            <p>Full breakfast on the ship. Cozumel is your <strong>longest port day (10 hours!)</strong> — pack extra snacks, water, and swim diapers. Ship docks right at the pier — no tender needed! 🎉</p>
+            <div class="tag-row">
+              <span class="tag tag-tip">🚢 Ship Docks at Pier!</span>
+              <span class="tag tag-food">🍌 Extra Snacks Today</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cozumel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cozumel-label">8:00 – 8:30 AM</div>
+            <h3>🚶 Explore San Miguel Town</h3>
+            <p>Walk off the ship right into <strong>San Miguel's colorful waterfront</strong>. Stroll the Malecón, peek into the central plaza, and grab a <strong>marquesita</strong> (Yucatecan Nutella crepe) for an early treat. The town is compact and stroller-friendly.</p>
+            <div class="tag-row">
+              <span class="tag tag-walk">🚶 Walkable from Port</span>
+              <span class="tag tag-food">🥞 Marquesitas!</span>
+              <span class="tag tag-cool">📸 Colorful Streets</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cozumel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cozumel-label">8:30 – 9:00 AM</div>
+            <h3>🚕 Taxi to Beach Club / El Cielo</h3>
+            <p>Grab a taxi from the port to your chosen beach club (~$10–15 one way) or head to the <strong>El Cielo boat tour meeting point</strong> if you booked the starfish tour. Taxis are plentiful and safe — agree on price before riding.</p>
+            <div class="tag-row">
+              <span class="tag tag-tip">🚕 Agree on fare first!</span>
+              <span class="tag tag-cost">💵 ~$10–15 each way</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cozumel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cozumel-label">9:00 AM – 12:00 PM</div>
+            <h3>🏖️ Morning — Beach + Snorkeling</h3>
+            <p><strong>This is your golden window!</strong> Toddler plays in the shallow water while you take turns snorkeling. If at Mr. Sanchos — enjoy the pool, beach, and start the all-inclusive food & drinks. If doing El Cielo tour — the starfish sandbar is pure magic for the whole family! ⭐</p>
+            <div class="tag-row">
+              <span class="tag tag-toddler">👶 Shallow Sand Play</span>
+              <span class="tag tag-relax">🤿 Take-Turns Snorkeling</span>
+              <span class="tag tag-cool">⭐ El Cielo Starfish!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cozumel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cozumel-label">12:00 – 1:30 PM</div>
+            <h3>🌮 Lunch — Tacos & Ceviche</h3>
+            <p>If at an all-inclusive club — <strong>feast on unlimited tacos, ceviche & margaritas</strong>. If in town — hit <strong>Taquería El Sitio</strong> for legendary al pastor, or <strong>La Cocay</strong> for upscale Mexican. Your toddler will love fresh fruit, rice, and soft tortillas. Nap time in the stroller! 😴</p>
+            <div class="tag-row">
+              <span class="tag tag-food">🌮 Tacos al Pastor</span>
+              <span class="tag tag-food">🦐 Fresh Ceviche</span>
+              <span class="tag tag-toddler">😴 Stroller Nap</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cozumel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cozumel-label">1:30 – 3:30 PM</div>
+            <h3>🌊 Afternoon Session</h3>
+            <p>After toddler naps — <strong>more beach time or explore</strong>! Try <strong>Chankanaab Park</strong> for the botanical gardens + sea lion show, or stay at the beach club and soak up the Caribbean. The afternoon sun is warm and the crowds thin out. More snorkeling if you want! 🐠</p>
+            <div class="tag-row">
+              <span class="tag tag-relax">🏖️ Afternoon Beach</span>
+              <span class="tag tag-walk">🌿 Explore Chankanaab</span>
+              <span class="tag tag-cool">🦁 Sea Lion Show</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cozumel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cozumel-label">3:30 – 4:30 PM</div>
+            <h3>🛍️ Back to Town — Shopping & Treats</h3>
+            <p>Taxi back to San Miguel for <strong>last-minute shopping</strong>. Pick up Mexican vanilla, hot sauce, handcrafted jewelry, or a tiny sombrero for the toddler! 😄 Grab a <strong>fresh coconut or paleta (Mexican popsicle)</strong> from a street vendor. Browse the open-air craft market.</p>
+            <div class="tag-row">
+              <span class="tag tag-walk">🛍️ Craft Market</span>
+              <span class="tag tag-food">🍦 Paletas!</span>
+              <span class="tag tag-cool">🧴 Mexican Vanilla</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="time-block">
+          <div class="time-dot-wrap"><div class="time-dot cozumel-dot"></div></div>
+          <div class="time-card">
+            <div class="time-label cozumel-label">4:30 – 5:30 PM</div>
+            <h3>⛵ Back on Board</h3>
+            <p>You have until <strong>5:30 PM</strong> — the latest of all your port days! Walk back to the ship from town (just minutes). Rinse off, change the toddler, and watch Cozumel fade into the sunset from the deck. What a day! 🌅</p>
+            <div class="tag-row">
+              <span class="tag tag-tip">⚠️ All aboard 5:30 PM!</span>
+              <span class="tag tag-relax">🌅 Sunset Sail-Away</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tips -->
+      <div class="collapsible open">
+        <div class="collapsible-header" onclick="toggleCollapse(this)">
+          <h3>💡 Cozumel Tips with a Toddler</h3>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="collapsible-body">
+          <ul class="tips-list">
+            <li><span class="bullet">🚢</span><span>Cozumel is a <strong>dock port</strong> — the ship pulls right up. No tender! Easy on/off with a stroller.</span></li>
+            <li><span class="bullet">💵</span><span>Mexican pesos get better prices at local shops, but <strong>USD is accepted everywhere</strong>. ATMs at the port give pesos.</span></li>
+            <li><span class="bullet">🚕</span><span>Taxis are <strong>not metered</strong> — always agree on the fare before getting in. Port to south hotel zone: ~$10–15.</span></li>
+            <li><span class="bullet">🤿</span><span><strong>El Cielo must be pre-booked</strong> — search "Cozumel El Cielo snorkel tour" on Viator or local operators.</span></li>
+            <li><span class="bullet">👟</span><span><strong>Water shoes are essential</strong> for rocky east side beaches and Money Bar. Bring them!</span></li>
+            <li><span class="bullet">🦺</span><span>Skip the east side of the island with a toddler — <strong>rough surf and no lifeguards</strong>.</span></li>
+            <li><span class="bullet">🌮</span><span>Try a <strong>marquesita</strong> (crispy crepe with Nutella, cheese & fruit) — the Yucatán's iconic street snack!</span></li>
+            <li><span class="bullet">🧴</span><span>All beach parks in Cozumel require <strong>reef-safe sunscreen</strong> — no oxybenzone!</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Pack Checklist -->
+      <div class="collapsible open">
+        <div class="collapsible-header" onclick="toggleCollapse(this)">
+          <h3>🎒 Packing Checklist</h3>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="collapsible-body">
+          <div class="pack-progress">
+            <span id="cozumel-pack-text">0 / 12 packed</span>
+            <div class="pack-progress-bar"><div class="pack-progress-fill" id="cozumel-pack-fill"></div></div>
+          </div>
+          <div class="pack-grid" id="cozumel-checklist">
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>🩱 Baby swimsuit + swim diapers (3+)</div>
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>☀️ Reef-safe SPF 50</div>
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>👟 Water shoes (rocky reefs!)</div>
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>🤿 Snorkel mask (adults)</div>
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>👒 Sun hat + UV rash guard</div>
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>🍌 Extra toddler snacks (long day!)</div>
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>💧 2× water bottles</div>
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>💵 Cash — small bills for taxis/tips</div>
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>📷 Waterproof phone case</div>
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>🧸 Comfort toy + changing pad</div>
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>🦺 Toddler swim float/vest</div>
+            <div class="pack-item" onclick="togglePack(this,'cozumel')"><div class="pack-check"></div>🩹 Mini first aid kit</div>
           </div>
         </div>
       </div>
