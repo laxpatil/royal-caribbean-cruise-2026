@@ -540,8 +540,10 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 24px;
-      overflow: hidden;
+      overflow: visible;
       box-shadow: var(--shadow);
+      position: relative;
+      z-index: 2;
     }
     .route-map-header {
       display: flex; align-items: center; gap: 14px;
@@ -553,8 +555,11 @@
     .route-map-header h2 { font-size: 1.2rem; font-weight: 900; color: var(--text-primary); margin: 0; }
     .map-sub { font-size: 0.8rem; color: var(--text-secondary); margin: 2px 0 0; }
     #cruise-map {
-      width: 100%; height: 380px;
-      z-index: 1;
+      width: 100%; height: 400px;
+      position: relative;
+      z-index: 10;
+      border-radius: 0;
+      background: #0a1628;
     }
     .map-legend {
       display: flex; flex-wrap: wrap; gap: 10px 20px;
@@ -651,7 +656,7 @@
           <p class="map-sub">Western Caribbean · April 12–19, 2026</p>
         </div>
       </div>
-      <div id="cruise-map"></div>
+      <div style="border-radius:0;overflow:hidden;position:relative;z-index:10;"><div id="cruise-map"></div></div>
       <div class="map-legend">
         <div class="legend-item"><span class="legend-dot home"></span> Port Canaveral (Home)</div>
         <div class="legend-item"><span class="legend-dot cococay"></span> CocoCay, Bahamas</div>
@@ -2374,14 +2379,20 @@
         p.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-delay:${Math.random()*5}s;animation-duration:${Math.random()*3+2}s;`;
         container.appendChild(p);
       }
-    })();
+    }
+  // Make sure DOM + Leaflet are both ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCruiseMap);
+  } else {
+    initCruiseMap();
+  }
   </script>
 
 
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script>
-  (function initCruiseMap() {
+  function initCruiseMap() {
     // ── ports in itinerary order ──────────────────────────────────────────
     const ports = [
       {
@@ -2605,7 +2616,13 @@
 
     // Fit map to show all ports with padding
     map.fitBounds(L.latLngBounds(ports.map(p => [p.lat, p.lng])), { padding: [40, 40] });
-  })();
+  }
+  // Make sure DOM + Leaflet are both ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCruiseMap);
+  } else {
+    initCruiseMap();
+  }
   </script>
 
 </body>
