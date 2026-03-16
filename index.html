@@ -578,6 +578,51 @@
       display: inline-block; margin-top: 8px; padding: 3px 10px;
       border-radius: 20px; font-size: 0.68rem; font-weight: 700;
     }
+
+    /* ===== Route Map ===== */
+    .route-map-section {
+      margin: 24px 0;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .route-map-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 18px 20px 14px;
+      background: rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .map-icon { font-size: 2rem; }
+    .route-map-header h2 { font-size: 1.2rem; font-weight: 900; color: #f0f4f8; margin: 0; }
+    .map-sub { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin: 2px 0 0; }
+    #cruise-map-canvas { width: 100%; height: 420px; display: block; background: #06131f; cursor: grab; }
+    #cruise-map-canvas:active { cursor: grabbing; }
+    .map-legend {
+      display: flex; flex-wrap: wrap; gap: 10px 20px;
+      padding: 14px 20px;
+      background: rgba(0,0,0,0.25);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .legend-item { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; color: rgba(255,255,255,0.7); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .map-tooltip {
+      position: fixed; pointer-events: none;
+      background: #0f2847; border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px; padding: 10px 14px;
+      font-family: 'Nunito', sans-serif; font-size: 0.8rem; color: #f0f4f8;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      max-width: 200px; z-index: 9999;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .map-tooltip.visible { opacity: 1; }
+    .map-tooltip h4 { margin: 0 0 4px; font-size: 0.9rem; font-weight: 800; }
+    .map-tooltip p  { margin: 2px 0; font-size: 0.73rem; opacity: 0.8; }
+    .map-tooltip .tt-badge {
+      display: inline-block; margin-top: 6px; padding: 2px 8px;
+      border-radius: 20px; font-size: 0.65rem; font-weight: 700;
+    }
+
   </style>
 </head>
 <body>
@@ -634,6 +679,26 @@
         <div class="legend-item"><span class="legend-dot roatan"></span>Roatán</div>
       </div>
     </div>
+
+    <!-- ==================== ROUTE MAP ==================== -->
+    <div class="route-map-section">
+      <div class="route-map-header">
+        <span class="map-icon">🗺️</span>
+        <div>
+          <h2>Ship Route</h2>
+          <p class="map-sub">Western Caribbean &nbsp;·&nbsp; April 12–19, 2026</p>
+        </div>
+      </div>
+      <canvas id="cruise-map-canvas"></canvas>
+      <div class="map-legend">
+        <div class="legend-item"><span class="legend-dot" style="background:#60a5fa"></span>Port Canaveral</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#f472b6"></span>CocoCay</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#34d399"></span>Cozumel</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#fbbf24"></span>Costa Maya</div>
+        <div class="legend-item"><span class="legend-dot" style="background:#a78bfa"></span>Roatán</div>
+      </div>
+    </div>
+    <div class="map-tooltip" id="map-tooltip"></div>
 
     <!-- Tabs -->
     <div class="tabs">
@@ -2351,8 +2416,6 @@
     })();
   </script>
 
-  <link rel="stylesheet" href="lib/leaflet.css" crossorigin=""/>
-  <script src="lib/leaflet.js" crossorigin=""></script>
   <script>
   window.addEventListener('load', function() {
     var ports = [
@@ -2465,5 +2528,273 @@
     map.fitBounds(L.latLngBounds(ports.map(function(p){ return [p.lat,p.lng]; })), { padding:[40,40] });
   });
   </script>
+
+  <script>
+  (function() {
+    var canvas = document.getElementById('cruise-map-canvas');
+    var tooltip = document.getElementById('map-tooltip');
+    var ctx = canvas.getContext('2d');
+
+    // Ports: [name, lat, lng, color, emoji, day, badge, facts[]]
+    var ports = [
+      { name:'Port Canaveral', lat:28.4158, lng:-80.5981, color:'#60a5fa', emoji:'🏠',
+        day:'Apr 12 & Apr 19', badge:'HOME PORT',
+        facts:['🚢 Departs 4:00 PM','🚗 50 min from Orlando MCO','⏱️ Disembark 9–10 AM'] },
+      { name:'CocoCay', lat:25.8248, lng:-77.7077, color:'#f472b6', emoji:'🏝️',
+        day:'Day 2 · Apr 13 · Bahamas', badge:'PRIVATE ISLAND',
+        facts:['🎢 Thrill Waterpark','👶 Toddler-friendly lagoon','⛵ Royal Caribbean private island'] },
+      { name:'Cozumel', lat:20.4229, lng:-86.9223, color:'#34d399', emoji:'🤿',
+        day:'Day 4 · Apr 15 · Mexico', badge:'SNORKEL PARADISE',
+        facts:['🐠 World-class coral reef','🏖️ Mr. Sanchos beach club','🐢 Sea turtles at Chankanaab'] },
+      { name:'Costa Maya', lat:18.7167, lng:-87.700, color:'#fbbf24', emoji:'🏛️',
+        day:'Day 5 · Apr 16 · Mexico', badge:'MAYAN HISTORY',
+        facts:['🏛️ Chacchoben Mayan Ruins','🏊 Free pool at pier','👶 Easy family port'] },
+      { name:'Roatán', lat:16.3185, lng:-86.5258, color:'#a78bfa', emoji:'🌺',
+        day:'Day 6 · Apr 17 · Honduras', badge:'HIDDEN GEM',
+        facts:['🐬 Dolphin encounters','🤿 Barrier Reef snorkeling','🏖️ West Bay Beach'] }
+    ];
+
+    // Map bounds (lon/lat bounding box for the Caribbean)
+    var MAP = { minLng:-92, maxLng:-74, minLat:13, maxLat:31 };
+
+    var W, H, shipFrac = 0, shipSeg = 0, hoveredPort = null;
+    var routeLoop = ports.map(function(p){ return p; }).concat([ports[0]]);
+
+    function resize() {
+      var rect = canvas.parentElement.getBoundingClientRect();
+      W = canvas.width  = rect.width  || 680;
+      H = canvas.height = 420;
+    }
+
+    function project(lat, lng) {
+      var x = (lng - MAP.minLng) / (MAP.maxLng - MAP.minLng) * W;
+      var y = (1 - (lat - MAP.minLat) / (MAP.maxLat - MAP.minLat)) * H;
+      return { x: x, y: y };
+    }
+
+    // -- SVG Caribbean landmass (simplified outlines) -----------------------
+    // Florida
+    var florida = [[25.1,-80.3],[25.7,-80.1],[26.1,-80.1],[27.0,-80.2],[28.0,-80.6],
+                   [28.4,-80.6],[28.8,-80.7],[29.0,-81.0],[29.3,-81.3],[29.9,-81.4],
+                   [30.4,-81.4],[30.7,-81.5],[30.7,-87.5],[29.5,-89.5],[29.0,-89.2],
+                   [28.8,-89.0],[29.5,-87.0],[29.0,-85.0],[28.0,-82.5],[27.3,-82.5],
+                   [26.8,-82.0],[26.0,-81.7],[25.5,-81.3],[25.1,-80.3]];
+    // Cuba
+    var cuba = [[23.2,-84.5],[23.1,-82.0],[23.5,-81.0],[22.6,-79.0],[22.0,-77.5],
+                [20.5,-74.2],[20.0,-75.0],[20.0,-77.5],[21.0,-80.0],[22.0,-82.5],
+                [23.2,-84.5]];
+    // Yucatan/Mexico coast
+    var yucatan = [[21.5,-87.2],[20.5,-87.0],[19.5,-87.5],[18.5,-88.5],[18.0,-88.0],
+                   [17.5,-88.5],[16.0,-88.5],[15.5,-88.0],[15.7,-87.0],[16.5,-86.0],
+                   [17.5,-86.0],[18.5,-86.5],[19.5,-87.0],[20.0,-87.5],[21.0,-86.9],
+                   [21.5,-86.7],[22.0,-86.8],[21.5,-87.2]];
+    // Jamaica
+    var jamaica = [[18.5,-78.3],[18.3,-77.1],[17.7,-76.2],[17.8,-77.2],[18.2,-78.0],[18.5,-78.3]];
+    // Hispaniola
+    var hispaniola = [[19.9,-73.5],[20.1,-72.0],[19.5,-71.0],[18.3,-71.5],[18.0,-73.0],
+                      [18.5,-74.5],[19.8,-74.5],[19.9,-73.5]];
+    // Bahamas (approximate)
+    var bahamas = [[27.2,-78.5],[26.5,-78.0],[25.8,-77.7],[25.5,-77.0],[24.8,-76.0],
+                   [24.3,-76.2],[24.8,-77.5],[25.5,-78.5],[26.0,-79.0],[27.2,-78.5]];
+    // Honduras coast
+    var honduras = [[16.5,-86.0],[16.3,-85.0],[15.8,-83.5],[15.0,-83.8],[14.5,-84.5],
+                    [14.0,-83.5],[13.5,-83.0],[13.0,-83.5],[13.2,-87.0],[14.0,-87.5],
+                    [15.0,-87.0],[15.8,-86.5],[16.5,-86.0]];
+    // Belize
+    var belize = [[18.5,-88.5],[18.5,-87.8],[17.5,-87.5],[16.0,-88.5],[16.0,-89.2],
+                  [17.5,-89.2],[18.5,-88.5]];
+    // Guatemala coast
+    var guatemala = [[15.5,-88.5],[15.5,-89.2],[13.5,-92.0],[14.5,-91.5],[15.0,-89.5],[15.5,-88.5]];
+
+    var landmasses = [
+      { pts: florida,    color: '#1a3a2a' },
+      { pts: cuba,       color: '#1a3a2a' },
+      { pts: yucatan,    color: '#1a3a2a' },
+      { pts: jamaica,    color: '#1a3a2a' },
+      { pts: hispaniola, color: '#1a3a2a' },
+      { pts: bahamas,    color: '#162e22' },
+      { pts: honduras,   color: '#1a3a2a' },
+      { pts: belize,     color: '#1a3a2a' },
+      { pts: guatemala,  color: '#1a3a2a' },
+    ];
+
+    function drawLand(pts, fillColor) {
+      if (!pts.length) return;
+      ctx.beginPath();
+      var p0 = project(pts[0][0], pts[0][1]);
+      ctx.moveTo(p0.x, p0.y);
+      for (var i = 1; i < pts.length; i++) {
+        var p = project(pts[i][0], pts[i][1]);
+        ctx.lineTo(p.x, p.y);
+      }
+      ctx.closePath();
+      ctx.fillStyle = fillColor;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+      ctx.lineWidth = 0.8;
+      ctx.stroke();
+    }
+
+    var dashOffset = 0;
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      // Ocean background gradient
+      var grad = ctx.createLinearGradient(0, 0, W, H);
+      grad.addColorStop(0,   '#061626');
+      grad.addColorStop(0.5, '#0a2340');
+      grad.addColorStop(1,   '#0d2e50');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle grid lines
+      ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+      ctx.lineWidth = 1;
+      for (var gx = 0; gx < W; gx += 60) {
+        ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke();
+      }
+      for (var gy = 0; gy < H; gy += 60) {
+        ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke();
+      }
+
+      // Draw landmasses
+      landmasses.forEach(function(lm) { drawLand(lm.pts, lm.color); });
+
+      // Glow route
+      var routePts = routeLoop.map(function(p){ return project(p.lat, p.lng); });
+      ctx.beginPath();
+      ctx.moveTo(routePts[0].x, routePts[0].y);
+      for (var i = 1; i < routePts.length; i++) ctx.lineTo(routePts[i].x, routePts[i].y);
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 10;
+      ctx.lineJoin = 'round';
+      ctx.stroke();
+
+      // Animated dashed route
+      ctx.beginPath();
+      ctx.moveTo(routePts[0].x, routePts[0].y);
+      for (var j = 1; j < routePts.length; j++) ctx.lineTo(routePts[j].x, routePts[j].y);
+      ctx.strokeStyle = 'rgba(255,255,255,0.65)';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([12, 8]);
+      ctx.lineDashOffset = dashOffset;
+      ctx.stroke();
+      ctx.setLineDash([]);
+      dashOffset -= 0.6;
+
+      // Port markers
+      ports.forEach(function(port, idx) {
+        var pt = project(port.lat, port.lng);
+        var r = hoveredPort === idx ? 11 : 9;
+        var isHome = idx === 0;
+
+        // Glow
+        var glow = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, r * 2.5);
+        glow.addColorStop(0, port.color + 'aa');
+        glow.addColorStop(1, port.color + '00');
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, r * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+
+        // Circle
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, isHome ? r + 2 : r, 0, Math.PI * 2);
+        ctx.fillStyle = port.color;
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Day number badge
+        ctx.beginPath();
+        ctx.arc(pt.x + (r + 2), pt.y - (r + 2), 7, 0, Math.PI * 2);
+        ctx.fillStyle = isHome ? '#60a5fa' : '#0a1628';
+        ctx.fill();
+        ctx.strokeStyle = port.color;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.fillStyle = isHome ? '#000' : port.color;
+        ctx.font = 'bold 7px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(isHome ? '★' : idx, pt.x + (r + 2), pt.y - (r + 2));
+
+        // Port name label
+        ctx.font = 'bold 11px Nunito, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.textBaseline = 'middle';
+        var label = port.emoji + ' ' + port.name;
+        var tw = ctx.measureText(label).width;
+        var lx = pt.x + r + 8, ly = pt.y;
+        // Flip label if too close to right edge
+        if (lx + tw + 8 > W) { lx = pt.x - r - 8 - tw; ctx.textAlign = 'left'; }
+
+        // Label background pill
+        ctx.fillStyle = 'rgba(6,18,31,0.88)';
+        ctx.beginPath();
+        ctx.roundRect ? ctx.roundRect(lx - 4, ly - 9, tw + 8, 18, 6)
+                      : (function(){ ctx.rect(lx-4, ly-9, tw+8, 18); })();
+        ctx.fill();
+        ctx.strokeStyle = port.color + '66';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.fillStyle = port.color;
+        ctx.fillText(label, lx, ly);
+      });
+
+      // Ship emoji along route
+      var a = routeLoop[shipSeg], b = routeLoop[shipSeg + 1] || routeLoop[0];
+      var sp = project(a.lat + (b.lat - a.lat) * shipFrac, a.lng + (b.lng - a.lng) * shipFrac);
+      ctx.font = '22px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('🚢', sp.x, sp.y);
+
+      // Advance ship
+      shipFrac += 0.003;
+      if (shipFrac >= 1) { shipFrac = 0; shipSeg = (shipSeg + 1) % (routeLoop.length - 1); }
+
+      requestAnimationFrame(draw);
+    }
+
+    // Tooltip on hover
+    canvas.addEventListener('mousemove', function(e) {
+      var rect = canvas.getBoundingClientRect();
+      var mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      var found = null;
+      ports.forEach(function(port, idx) {
+        var pt = project(port.lat, port.lng);
+        var dx = mx - pt.x, dy = my - pt.y;
+        if (Math.sqrt(dx*dx + dy*dy) < 16) found = idx;
+      });
+      hoveredPort = found;
+      if (found !== null) {
+        var port = ports[found];
+        tooltip.innerHTML = '<h4>' + port.emoji + ' ' + port.name + '</h4>' +
+          '<p style="color:' + port.color + ';font-weight:700;margin-bottom:5px">📅 ' + port.day + '</p>' +
+          port.facts.map(function(f){ return '<p>' + f + '</p>'; }).join('') +
+          '<span class="tt-badge" style="background:' + port.color + '33;color:' + port.color + '">' + port.badge + '</span>';
+        tooltip.style.left = (e.clientX + 14) + 'px';
+        tooltip.style.top  = (e.clientY - 10) + 'px';
+        tooltip.classList.add('visible');
+        canvas.style.cursor = 'pointer';
+      } else {
+        tooltip.classList.remove('visible');
+        canvas.style.cursor = 'grab';
+      }
+    });
+    canvas.addEventListener('mouseleave', function() {
+      tooltip.classList.remove('visible');
+      hoveredPort = null;
+    });
+
+    resize();
+    window.addEventListener('resize', function() { resize(); });
+    draw();
+  })();
+  </script>
+
 </body>
 </html>
