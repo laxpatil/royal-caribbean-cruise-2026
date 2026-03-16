@@ -394,6 +394,29 @@
     .tag-flight { background: rgba(124,77,255,0.15); color: #b388ff; border-color: rgba(124,77,255,0.25); }
     .tag-car { background: rgba(255,152,0,0.15); color: #ffb74d; border-color: rgba(255,152,0,0.25); }
 
+    /* ===== Hero Images ===== */
+    .hero-image {
+      width: 100%; height: 200px; border-radius: 20px;
+      overflow: hidden; margin-bottom: 16px;
+      position: relative;
+      box-shadow: var(--shadow);
+    }
+    .hero-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .hero-image:hover img { transform: scale(1.05); }
+    .hero-image .hero-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 30px 16px 12px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      font-size: 0.75rem; color: rgba(255,255,255,0.8);
+      font-weight: 600;
+    }
+    @media (max-width: 520px) {
+      .hero-image { height: 160px; }
+    }
+
     /* ===== Collapsible Sections ===== */
     .collapsible {
       background: var(--card-bg); border: 1px solid var(--card-border);
@@ -535,6 +558,11 @@
       <p class="subtitle">April 12–19, 2026 &nbsp;·&nbsp; Western Caribbean &nbsp;·&nbsp; 👶 Toddler-Friendly</p>
     </div>
 
+    <div class="hero-image">
+      <img src="https://images.unsplash.com/photo-1599640842225-85d111c60e6b?w=800&q=80" alt="Star of the Seas cruise ship" loading="lazy">
+      <div class="hero-caption">🚢 Royal Caribbean — Star of the Seas</div>
+    </div>
+
     <!-- Countdown -->
     <div class="countdown-bar" id="countdown">
       <div class="cd-unit"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Days</div></div>
@@ -562,6 +590,11 @@
           <p class="port-sub">Flights · Car Rental · Getting to Port Canaveral</p>
           <div class="weather-badge">📋 All confirmations & timings in one place</div>
         </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=800&q=80" alt="Airplane wing at sunset" loading="lazy">
+        <div class="hero-caption">✈️ Seattle → Chicago → Orlando → Port Canaveral</div>
       </div>
 
       <!-- Confirmation Cards -->
@@ -863,6 +896,11 @@
         </div>
       </div>
 
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=800&q=80" alt="Costa Maya turquoise Caribbean beach" loading="lazy">
+        <div class="hero-caption">🏖️ Mahahual Beach — Crystal-clear Caribbean waters</div>
+      </div>
+
       <div class="budget-bar">
         <div class="budget-icon">💰</div>
         <div class="budget-info">
@@ -1149,6 +1187,11 @@
           <p class="port-sub">Stunning coral reef island · Lush & tropical · West Bay Beach</p>
           <div class="weather-badge">🌤️ ~29°C / 85°F &nbsp;·&nbsp; Tropical & Breezy</div>
         </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80" alt="Roatan Honduras turquoise water and coral reef" loading="lazy">
+        <div class="hero-caption">🤿 West Bay Beach — One of the best reefs in the Caribbean</div>
       </div>
 
       <div class="budget-bar">
@@ -1470,6 +1513,11 @@
         </div>
       </div>
 
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=800&q=80" alt="CocoCay Bahamas private island beach" loading="lazy">
+        <div class="hero-caption">🏝️ Perfect Day at CocoCay — Royal Caribbean's Private Island</div>
+      </div>
+
       <div class="budget-bar">
         <div class="budget-icon">💰</div>
         <div class="budget-info">
@@ -1784,6 +1832,11 @@
           <p class="port-sub">Day 4 — Wed, April 15 · World-Class Reefs · 10 Hours Ashore!</p>
           <div class="weather-badge">☀️ ~31°C / 88°F &nbsp;·&nbsp; Sunny & Warm</div>
         </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?w=800&q=80" alt="Cozumel Mexico crystal clear water and beach" loading="lazy">
+        <div class="hero-caption">🤿 Cozumel — World-class reefs & El Cielo starfish sandbar</div>
       </div>
 
       <div class="budget-bar">
