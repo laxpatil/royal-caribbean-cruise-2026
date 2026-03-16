@@ -1,0 +1,76 @@
+<!-- Destination Block Template - {{DEST_NAME}} -->
+<div class="day-panel" id="{{DEST_ID}}">
+
+  <div class="port-banner" style="background: linear-gradient(135deg, {{DEST_COLOR}}, rgba(255,215,0,0.8));">
+    <div class="port-icon">{{DEST_EMOJI}}</div>
+    <div class="port-info">
+      <h2>{{DEST_NAME}}</h2>
+      <p class="port-sub">{{DEST_COUNTRY}} · {{DEST_DATE}}</p>
+      <div class="weather-badge">📍 {{DEST_COUNTRY}}</div>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="{{DEST_IMAGE_URL}}" alt="{{DEST_NAME}}" loading="lazy">
+    <div class="hero-caption">{{DEST_EMOJI}} {{DEST_NAME}}</div>
+  </div>
+
+  <div class="budget-bar">
+    <div class="budget-icon">💰</div>
+    <div class="budget-info">
+      <div class="budget-label">Estimated Budget</div>
+      <div class="budget-amount">{{DEST_BUDGET_TOTAL}}</div>
+      <div class="budget-detail">Activities · Food · Transport · Shopping</div>
+    </div>
+    <div class="budget-progress">
+      <div class="budget-fill {{DEST_BUDGET_FILL_CLASS}}" style="width: 50%"></div>
+    </div>
+  </div>
+
+  <!-- Budget Breakdown (optional) -->
+  {{DEST_BUDGET_ITEMS}}
+
+  <!-- Activities Section -->
+  <div class="options-section">
+    <h3>🎯 Things to Do</h3>
+    <div class="option-cards">
+      {{DEST_ACTIVITIES}}
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+    {{DEST_TIMELINE}}
+  </div>
+
+  <!-- Tips (collapsible) -->
+  <div class="collapsible open">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">
+      <h3>💡 Local Tips</h3>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="collapsible-body">
+      <ul class="tips-list">
+        {{DEST_TIPS}}
+      </ul>
+    </div>
+  </div>
+
+  <!-- Pack Checklist (collapsible & interactive) -->
+  <div class="collapsible open">
+    <div class="collapsible-header" onclick="toggleCollapse(this)">
+      <h3>🎒 Packing Checklist</h3>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="collapsible-body">
+      <div class="pack-progress">
+        <span class="{{DEST_ID}}-pack-text">0 / {{DEST_CHECKLIST_COUNT}} packed</span>
+        <div class="pack-progress-bar"><div class="pack-progress-fill" id="{{DEST_ID}}-pack-fill"></div></div>
+      </div>
+      <div class="pack-grid" id="{{DEST_CHECKLIST_ID}}">
+        {{DEST_CHECKLIST_ITEMS}}
+      </div>
+    </div>
+  </div>
+
+</div>
