@@ -533,52 +533,7 @@
     .back-to-top.cococay-top { background: linear-gradient(135deg, #e91e63, #c2185b); box-shadow: 0 4px 16px rgba(233,30,99,0.4); }
     .back-to-top.cozumel-top { background: linear-gradient(135deg, #00bcd4, #0097a7); box-shadow: 0 4px 16px rgba(0,188,212,0.4); }
     .back-to-top.travel-top { background: linear-gradient(135deg, #7c4dff, #651fff); box-shadow: 0 4px 16px rgba(124,77,255,0.4); }
-    /* ===== Route Map ===== */
-    .route-map-section {
-      margin: 24px 0;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-    .route-map-header {
-      display: flex; align-items: center; gap: 14px;
-      padding: 18px 20px 14px;
-      background: rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .map-icon { font-size: 2rem; }
-    .route-map-header h2 { font-size: 1.2rem; font-weight: 900; color: #f0f4f8; margin: 0; }
-    .map-sub { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin: 2px 0 0; }
-    #cruise-map { width: 100%; height: 400px; display: block; }
-    .map-legend {
-      display: flex; flex-wrap: wrap; gap: 10px 20px;
-      padding: 14px 20px;
-      background: rgba(0,0,0,0.25);
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .legend-item { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; color: rgba(255,255,255,0.7); }
-    .legend-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
-    .legend-dot.home    { background: #60a5fa; }
-    .legend-dot.cococay { background: #f472b6; }
-    .legend-dot.cozumel { background: #34d399; }
-    .legend-dot.costa   { background: #fbbf24; }
-    .legend-dot.roatan  { background: #a78bfa; }
-    .leaflet-popup-content-wrapper {
-      background: #0f2847 !important; color: #f0f4f8 !important;
-      border: 1px solid rgba(255,255,255,0.15) !important;
-      border-radius: 14px !important; box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
-    }
-    .leaflet-popup-tip { background: #0f2847 !important; }
-    .leaflet-popup-close-button { color: rgba(255,255,255,0.6) !important; }
-    .cruise-popup h3 { margin: 0 0 5px; font-size: 0.95rem; font-weight: 800; }
-    .cruise-popup .pop-day { font-size: 0.72rem; opacity: 0.7; margin-bottom: 7px; }
-    .cruise-popup .pop-facts { list-style: none; padding: 0; margin: 0; font-size: 0.76rem; line-height: 1.9; }
-    .cruise-popup .pop-badge {
-      display: inline-block; margin-top: 8px; padding: 3px 10px;
-      border-radius: 20px; font-size: 0.68rem; font-weight: 700;
-    }
-
+    
     /* ===== Route Map ===== */
     .route-map-section {
       margin: 24px 0;
@@ -595,7 +550,7 @@
     }
     .map-icon { font-size: 2rem; }
     .route-map-header h2 { font-size: 1.2rem; font-weight: 900; color: #f0f4f8; margin: 0; }
-    .map-sub { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin: 2px 0 0; }
+    .map-sub  { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin: 2px 0 0; }
     #cruise-map-canvas { width: 100%; height: 420px; display: block; background: #06131f; cursor: grab; }
     #cruise-map-canvas:active { cursor: grabbing; }
     .map-legend {
@@ -605,7 +560,7 @@
       border-top: 1px solid rgba(255,255,255,0.1);
     }
     .legend-item { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; color: rgba(255,255,255,0.7); }
-    .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .legend-dot  { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
     .map-tooltip {
       position: fixed; pointer-events: none;
       background: #0f2847; border: 1px solid rgba(255,255,255,0.2);
@@ -616,8 +571,8 @@
       opacity: 0; transition: opacity 0.2s;
     }
     .map-tooltip.visible { opacity: 1; }
-    .map-tooltip h4 { margin: 0 0 4px; font-size: 0.9rem; font-weight: 800; }
-    .map-tooltip p  { margin: 2px 0; font-size: 0.73rem; opacity: 0.8; }
+    .map-tooltip h4  { margin: 0 0 4px; font-size: 0.9rem; font-weight: 800; }
+    .map-tooltip p   { margin: 2px 0; font-size: 0.73rem; opacity: 0.8; }
     .map-tooltip .tt-badge {
       display: inline-block; margin-top: 6px; padding: 2px 8px;
       border-radius: 20px; font-size: 0.65rem; font-weight: 700;
@@ -659,25 +614,6 @@
       <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hours</div></div>
       <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Mins</div></div>
       <div class="cd-unit"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Secs</div></div>
-    </div>
-
-    <!-- ==================== ROUTE MAP ==================== -->
-    <div class="route-map-section">
-      <div class="route-map-header">
-        <span class="map-icon">🗺️</span>
-        <div>
-          <h2>Ship Route</h2>
-          <p class="map-sub">Western Caribbean &nbsp;·&nbsp; April 12–19, 2026</p>
-        </div>
-      </div>
-      <div id="cruise-map"></div>
-      <div class="map-legend">
-        <div class="legend-item"><span class="legend-dot home"></span>Port Canaveral</div>
-        <div class="legend-item"><span class="legend-dot cococay"></span>CocoCay</div>
-        <div class="legend-item"><span class="legend-dot cozumel"></span>Cozumel</div>
-        <div class="legend-item"><span class="legend-dot costa"></span>Costa Maya</div>
-        <div class="legend-item"><span class="legend-dot roatan"></span>Roatán</div>
-      </div>
     </div>
 
     <!-- ==================== ROUTE MAP ==================== -->
@@ -2416,118 +2352,6 @@
     })();
   </script>
 
-  <script>
-  window.addEventListener('load', function() {
-    var ports = [
-      { name:'Port Canaveral', lat:28.4158, lng:-80.5981, color:'#60a5fa', emoji:'🏠',
-        day:'Apr 12 (Depart) & Apr 19 (Return)',
-        facts:['🚢 Departs 4:00 PM','🚗 ~50 min from Orlando MCO','⏱️ Return disembark 9–10 AM'],
-        badge:'HOME PORT' },
-      { name:'CocoCay', lat:25.8248, lng:-77.7077, color:'#f472b6', emoji:'🏝️',
-        day:'Day 2 — Apr 13 · Bahamas',
-        facts:['🎢 Thrill Waterpark & Oasis Lagoon','👶 Shallow lagoon perfect for toddlers','⛵ Private Royal Caribbean island'],
-        badge:'PRIVATE ISLAND' },
-      { name:'Cozumel', lat:20.4229, lng:-86.9223, color:'#34d399', emoji:'🤿',
-        day:'Day 4 — Apr 15 · Mexico',
-        facts:['🐠 World-class coral reef snorkeling','🏖️ Mr. Sanchos beach club','🐢 Sea turtles at Chankanaab Park'],
-        badge:'SNORKEL PARADISE' },
-      { name:'Costa Maya', lat:18.7167, lng:-87.7000, color:'#fbbf24', emoji:'🏛️',
-        day:'Day 5 — Apr 16 · Mexico',
-        facts:['🏛️ Chacchoben Mayan Ruins','🏊 Free pool & beach at pier','👶 Easy port — great for families'],
-        badge:'MAYAN HISTORY' },
-      { name:'Roatán', lat:16.3185, lng:-86.5258, color:'#a78bfa', emoji:'🌺',
-        day:'Day 6 — Apr 17 · Honduras',
-        facts:['🐬 Dolphin encounters','🤿 Mesoamerican Barrier Reef','🏖️ West Bay — top Caribbean beach'],
-        badge:'HIDDEN GEM' }
-    ];
-
-    var map = L.map('cruise-map', { zoomControl: true });
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '© CARTO',
-      subdomains: 'abcd', maxZoom: 19
-    }).addTo(map);
-
-    // Route coords (loop back to start)
-    var coords = ports.map(function(p){ return [p.lat, p.lng]; });
-    coords.push([ports[0].lat, ports[0].lng]);
-
-    // Glow
-    L.polyline(coords, { color:'rgba(255,255,255,0.07)', weight:10, smoothFactor:1.5 }).addTo(map);
-    // Dashed line
-    var routeLine = L.polyline(coords, {
-      color:'rgba(255,255,255,0.6)', weight:2.5,
-      dashArray:'12 8', smoothFactor:1.5
-    }).addTo(map);
-
-    // Animate dash
-    setTimeout(function() {
-      var el = routeLine.getElement();
-      if (el) {
-        var offset = 0;
-        (function tick() {
-          offset -= 0.5;
-          el.style.strokeDashoffset = offset;
-          requestAnimationFrame(tick);
-        })();
-      }
-    }, 300);
-
-    // Markers + popups
-    ports.forEach(function(port, idx) {
-      var circle = L.circleMarker([port.lat, port.lng], {
-        radius: idx === 0 ? 12 : 9,
-        fillColor: port.color, color:'#fff',
-        weight: 2.5, opacity: 1, fillOpacity: 0.95
-      }).addTo(map);
-
-      var labelDiv = L.divIcon({
-        className: '',
-        html: '<div style="background:' + port.color + ';color:#000;font-weight:900;font-size:10px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.6);font-family:sans-serif">' + (idx === 0 ? '★' : idx) + '</div>',
-        iconSize:[20,20], iconAnchor:[10,10]
-      });
-      L.marker([port.lat, port.lng], { icon: labelDiv, zIndexOffset:100 }).addTo(map);
-
-      var nameDiv = L.divIcon({
-        className: '',
-        html: '<div style="background:rgba(8,18,36,0.88);color:' + port.color + ';font-weight:800;font-size:11px;padding:2px 8px;border-radius:8px;border:1px solid ' + port.color + '55;white-space:nowrap;font-family:sans-serif;pointer-events:none;box-shadow:0 2px 6px rgba(0,0,0,0.4)">' + port.emoji + ' ' + port.name + '</div>',
-        iconSize:[130,22], iconAnchor:[-16,11]
-      });
-      L.marker([port.lat, port.lng], { icon: nameDiv, zIndexOffset:50, interactive:false }).addTo(map);
-
-      var factsHtml = port.facts.map(function(f){ return '<li>' + f + '</li>'; }).join('');
-      circle.bindPopup(
-        '<div class="cruise-popup"><h3>' + port.emoji + ' ' + port.name + '</h3>' +
-        '<div class="pop-day">📅 ' + port.day + '</div>' +
-        '<ul class="pop-facts">' + factsHtml + '</ul>' +
-        '<span class="pop-badge" style="background:' + port.color + '33;color:' + port.color + '">' + port.badge + '</span></div>',
-        { maxWidth: 230 }
-      );
-    });
-
-    // Sailing ship
-    var shipIcon = L.divIcon({
-      className: '',
-      html: '<div style="font-size:22px;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.9));line-height:1">🚢</div>',
-      iconSize:[26,26], iconAnchor:[13,13]
-    });
-    var ship = L.marker(coords[0], { icon:shipIcon, zIndexOffset:300 }).addTo(map);
-
-    var seg = 0, frac = 0;
-    (function sail() {
-      if (seg >= coords.length - 1) { seg = 0; frac = 0; }
-      frac += 0.003;
-      if (frac >= 1) { seg++; frac = 0; }
-      if (seg < coords.length - 1) {
-        var a = coords[seg], b = coords[seg+1];
-        ship.setLatLng([a[0]+(b[0]-a[0])*frac, a[1]+(b[1]-a[1])*frac]);
-      }
-      requestAnimationFrame(sail);
-    })();
-
-    map.fitBounds(L.latLngBounds(ports.map(function(p){ return [p.lat,p.lng]; })), { padding:[40,40] });
-  });
-  </script>
 
   <script>
   (function() {
