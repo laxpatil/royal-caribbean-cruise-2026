@@ -4,7 +4,7 @@
 
 ### *Your Caribbean Cruise • April 12–19 • With a Toddler* 👶🌊
 
-[![GitHub Pages](https://img.shields.io/badge/🌐_Live_Site-GitHub_Pages-blue?style=for-the-badge)](https://pages.github.pie.apple.com/lpatil/royal-caribbean-cruise-2026/)
+[![GitHub Pages](https://img.shields.io/badge/🌐_Live_Site-GitHub_Pages-blue?style=for-the-badge)](https://laxpatil.github.io/royal-caribbean-cruise-2026/)
 [![Made with Love](https://img.shields.io/badge/Made_with-❤️-red?style=for-the-badge)]()
 [![Toddler Friendly](https://img.shields.io/badge/Toddler-Friendly_👶-pink?style=for-the-badge)]()
 
@@ -12,7 +12,7 @@
 
 **An interactive, mobile-friendly day planner for a Caribbean cruise with a 16-month-old toddler.**
 
-### 🔗 [**Open Live Planner →**](https://pages.github.pie.apple.com/lpatil/royal-caribbean-cruise-2026/)
+### 🔗 [**Open Live Planner →**](https://laxpatil.github.io/royal-caribbean-cruise-2026/)
 
 ---
 
@@ -49,7 +49,7 @@
 
 ## 🚀 Usage
 
-Simply open the [**live site**](https://pages.github.pie.apple.com/lpatil/cruise-planner/) on your phone or laptop — no installation needed!
+Simply open the [**live site**](https://laxpatil.github.io/royal-caribbean-cruise-2026/) on your phone or laptop — no installation needed!
 
 Or clone and open locally:
 
