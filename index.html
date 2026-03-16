@@ -533,7 +533,77 @@
     .back-to-top.cococay-top { background: linear-gradient(135deg, #e91e63, #c2185b); box-shadow: 0 4px 16px rgba(233,30,99,0.4); }
     .back-to-top.cozumel-top { background: linear-gradient(135deg, #00bcd4, #0097a7); box-shadow: 0 4px 16px rgba(0,188,212,0.4); }
     .back-to-top.travel-top { background: linear-gradient(135deg, #7c4dff, #651fff); box-shadow: 0 4px 16px rgba(124,77,255,0.4); }
+
+    /* ===== Route Map ===== */
+    .route-map-section {
+      margin: 24px 0;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .route-map-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 18px 20px 14px;
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .map-icon { font-size: 2rem; }
+    .route-map-header h2 { font-size: 1.2rem; font-weight: 900; color: var(--text-primary); margin: 0; }
+    .map-sub { font-size: 0.8rem; color: var(--text-secondary); margin: 2px 0 0; }
+    #cruise-map {
+      width: 100%; height: 380px;
+      z-index: 1;
+    }
+    .map-legend {
+      display: flex; flex-wrap: wrap; gap: 10px 20px;
+      padding: 14px 20px;
+      background: rgba(0,0,0,0.2);
+      border-top: 1px solid var(--card-border);
+    }
+    .legend-item { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; color: var(--text-secondary); }
+    .legend-dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .legend-dot.home    { background: #60a5fa; box-shadow: 0 0 6px #60a5fa; }
+    .legend-dot.cococay { background: #f472b6; box-shadow: 0 0 6px #f472b6; }
+    .legend-dot.cozumel { background: #34d399; box-shadow: 0 0 6px #34d399; }
+    .legend-dot.costa   { background: #fbbf24; box-shadow: 0 0 6px #fbbf24; }
+    .legend-dot.roatan  { background: #a78bfa; box-shadow: 0 0 6px #a78bfa; }
+
+    /* Leaflet popup override */
+    .leaflet-popup-content-wrapper {
+      background: #0f2847 !important;
+      border: 1px solid rgba(255,255,255,0.15) !important;
+      border-radius: 14px !important;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+      color: #f0f4f8 !important;
+    }
+    .leaflet-popup-tip { background: #0f2847 !important; }
+    .leaflet-popup-close-button { color: rgba(255,255,255,0.6) !important; font-size: 18px !important; top: 8px !important; right: 10px !important; }
+    .cruise-popup h3 { margin: 0 0 6px; font-size: 1rem; font-weight: 800; }
+    .cruise-popup .pop-day  { font-size: 0.75rem; opacity: 0.7; margin-bottom: 8px; }
+    .cruise-popup .pop-facts { list-style: none; padding: 0; margin: 0; font-size: 0.78rem; line-height: 1.8; }
+    .cruise-popup .pop-facts li::before { content: attr(data-icon) ' '; }
+    .cruise-popup .pop-badge {
+      display: inline-block; margin-top: 8px;
+      padding: 3px 10px; border-radius: 20px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px;
+    }
+
+    /* animated ship pulse */
+    @keyframes shipPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50%       { transform: translate(-50%, -50%) scale(1.25); }
+    }
+    .ship-marker-icon { animation: shipPulse 2s ease-in-out infinite; }
+
+    /* route dash animation */
+    @keyframes dashMove {
+      to { stroke-dashoffset: -30; }
+    }
+
   </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 </head>
 <body>
 
@@ -569,6 +639,26 @@
       <div class="cd-unit"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hours</div></div>
       <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Mins</div></div>
       <div class="cd-unit"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Secs</div></div>
+    </div>
+
+
+    <!-- ==================== ROUTE MAP ==================== -->
+    <div class="route-map-section">
+      <div class="route-map-header">
+        <span class="map-icon">🗺️</span>
+        <div>
+          <h2>Ship Route</h2>
+          <p class="map-sub">Western Caribbean · April 12–19, 2026</p>
+        </div>
+      </div>
+      <div id="cruise-map"></div>
+      <div class="map-legend">
+        <div class="legend-item"><span class="legend-dot home"></span> Port Canaveral (Home)</div>
+        <div class="legend-item"><span class="legend-dot cococay"></span> CocoCay, Bahamas</div>
+        <div class="legend-item"><span class="legend-dot cozumel"></span> Cozumel, Mexico</div>
+        <div class="legend-item"><span class="legend-dot costa"></span> Costa Maya, Mexico</div>
+        <div class="legend-item"><span class="legend-dot roatan"></span> Roatán, Honduras</div>
+      </div>
     </div>
 
     <!-- Tabs -->
@@ -2285,6 +2375,237 @@
         container.appendChild(p);
       }
     })();
+  </script>
+
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script>
+  (function initCruiseMap() {
+    // ── ports in itinerary order ──────────────────────────────────────────
+    const ports = [
+      {
+        name: 'Port Canaveral', country: 'Florida, USA',
+        lat: 28.4158, lng: -80.5981,
+        color: '#60a5fa', emoji: '🏠',
+        day: 'Apr 12 (Departure) & Apr 19 (Return)',
+        facts: [
+          { icon: '🚢', text: 'Star of the Seas departs 4:00 PM' },
+          { icon: '⏱️', text: 'Return disembark by 9–10 AM' },
+          { icon: '🚗', text: '~50 min from Orlando MCO (SR-528)' },
+        ],
+        badge: { text: 'HOME PORT', bg: 'rgba(96,165,250,0.2)', color: '#60a5fa' }
+      },
+      {
+        name: 'CocoCay', country: 'Bahamas 🏝️',
+        lat: 25.8248, lng: -77.7077,
+        color: '#f472b6', emoji: '🏝️',
+        day: 'Day 2 — Apr 13',
+        facts: [
+          { icon: '🎢', text: 'Thrill Waterpark & Oasis Lagoon' },
+          { icon: '🌊', text: 'Best snorkeling on the island' },
+          { icon: '👶', text: 'Perfect for toddlers — shallow lagoon' },
+          { icon: '⛵', text: 'Private Royal Caribbean island' },
+        ],
+        badge: { text: 'PRIVATE ISLAND', bg: 'rgba(244,114,182,0.2)', color: '#f472b6' }
+      },
+      {
+        name: 'Cozumel', country: 'Mexico 🇲🇽',
+        lat: 20.4229, lng: -86.9223,
+        color: '#34d399', emoji: '🤿',
+        day: 'Day 4 — Apr 15',
+        facts: [
+          { icon: '🐠', text: 'World-class coral reef snorkeling' },
+          { icon: '🏖️', text: 'Mr. Sanchos & Playa Mia beach clubs' },
+          { icon: '🛍️', text: 'San Miguel town — tequila & shopping' },
+          { icon: '🐢', text: 'Sea turtles at Chankanaab Park' },
+        ],
+        badge: { text: 'SNORKEL PARADISE', bg: 'rgba(52,211,153,0.2)', color: '#34d399' }
+      },
+      {
+        name: 'Costa Maya', country: 'Mexico 🇲🇽',
+        lat: 18.7167, lng: -87.7000,
+        color: '#fbbf24', emoji: '🏛️',
+        day: 'Day 5 — Apr 16',
+        facts: [
+          { icon: '🏛️', text: 'Chacchoben Mayan Ruins nearby' },
+          { icon: '🏊', text: 'Free pool & beach at pier complex' },
+          { icon: '🛒', text: 'Open-air market & local crafts' },
+          { icon: '👶', text: 'Easy port — great for families' },
+        ],
+        badge: { text: 'MAYAN HISTORY', bg: 'rgba(251,191,36,0.2)', color: '#fbbf24' }
+      },
+      {
+        name: 'Roatán', country: 'Honduras 🇭🇳',
+        lat: 16.3185, lng: -86.5258,
+        color: '#a78bfa', emoji: '🌺',
+        day: 'Day 6 — Apr 17',
+        facts: [
+          { icon: '🐬', text: 'Dolphin encounters at Anthony's Key' },
+          { icon: '🤿', text: 'Pristine Mesoamerican Barrier Reef' },
+          { icon: '🦥', text: 'Sloth & monkey sanctuary' },
+          { icon: '🏖️', text: 'West Bay Beach — top-rated Caribbean' },
+        ],
+        badge: { text: 'HIDDEN GEM', bg: 'rgba(167,139,250,0.2)', color: '#a78bfa' }
+      },
+    ];
+
+    // ── init map centred on route ─────────────────────────────────────────
+    const map = L.map('cruise-map', {
+      center: [22.5, -82],
+      zoom: 5,
+      zoomControl: true,
+      attributionControl: true,
+    });
+
+    // Dark ocean tile layer (CartoDB Dark Matter)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(map);
+
+    // ── animated dashed route polyline ────────────────────────────────────
+    const routeCoords = ports.map(p => [p.lat, p.lng]);
+    // close the loop back to Port Canaveral
+    routeCoords.push([ports[0].lat, ports[0].lng]);
+
+    // Glow underline
+    L.polyline(routeCoords, {
+      color: 'rgba(255,255,255,0.08)',
+      weight: 8,
+      smoothFactor: 1.5,
+    }).addTo(map);
+
+    // Main animated dashed line
+    const routeLine = L.polyline(routeCoords, {
+      color: 'rgba(255,255,255,0.55)',
+      weight: 2.5,
+      dashArray: '10, 8',
+      smoothFactor: 1.5,
+    }).addTo(map);
+
+    // Animate the dash offset via SVG
+    function animateDash() {
+      const path = routeLine.getElement();
+      if (!path) { requestAnimationFrame(animateDash); return; }
+      let offset = 0;
+      function step() {
+        offset -= 0.4;
+        path.style.strokeDashoffset = offset;
+        requestAnimationFrame(step);
+      }
+      step();
+    }
+    map.on('layeradd', function onLayerAdd(e) {
+      if (e.layer === routeLine) {
+        map.off('layeradd', onLayerAdd);
+        setTimeout(animateDash, 100);
+      }
+    });
+    // Kick off animation after a brief delay
+    setTimeout(animateDash, 400);
+
+    // ── port markers ──────────────────────────────────────────────────────
+    ports.forEach((port, idx) => {
+      // Custom circle marker
+      const marker = L.circleMarker([port.lat, port.lng], {
+        radius: idx === 0 ? 11 : 9,
+        fillColor: port.color,
+        color: '#fff',
+        weight: 2,
+        opacity: 1,
+        fillOpacity: 0.95,
+      }).addTo(map);
+
+      // Day number label
+      const labelIcon = L.divIcon({
+        className: '',
+        html: `<div style="
+          background:${port.color};
+          color:#000;
+          font-weight:900;
+          font-size:10px;
+          width:18px;height:18px;
+          border-radius:50%;
+          display:flex;align-items:center;justify-content:center;
+          border:2px solid #fff;
+          box-shadow:0 2px 8px rgba(0,0,0,0.5);
+          font-family:Nunito,sans-serif;
+          ">${idx === 0 ? '🏠' : idx}</div>`,
+        iconSize: [18, 18],
+        iconAnchor: [9, 9],
+      });
+      L.marker([port.lat, port.lng], { icon: labelIcon, zIndexOffset: 100 }).addTo(map);
+
+      // Port name label
+      const nameIcon = L.divIcon({
+        className: '',
+        html: `<div style="
+          background:rgba(10,22,40,0.85);
+          color:${port.color};
+          font-weight:800;
+          font-size:11px;
+          padding:2px 7px;
+          border-radius:8px;
+          border:1px solid ${port.color}44;
+          white-space:nowrap;
+          font-family:Nunito,sans-serif;
+          pointer-events:none;
+          box-shadow:0 2px 8px rgba(0,0,0,0.4);
+          ">${port.emoji} ${port.name}</div>`,
+        iconSize: [120, 22],
+        iconAnchor: [-14, 11],
+      });
+      L.marker([port.lat, port.lng], { icon: nameIcon, zIndexOffset: 50, interactive: false }).addTo(map);
+
+      // Popup
+      const factsHtml = port.facts.map(f =>
+        `<li data-icon="${f.icon}">${f.text}</li>`
+      ).join('');
+      const popupHtml = `
+        <div class="cruise-popup">
+          <h3>${port.emoji} ${port.name}</h3>
+          <div class="pop-day">📅 ${port.day} · ${port.country}</div>
+          <ul class="pop-facts">${factsHtml}</ul>
+          <span class="pop-badge" style="background:${port.badge.bg};color:${port.badge.color}">${port.badge.text}</span>
+        </div>`;
+      marker.bindPopup(popupHtml, { maxWidth: 240, className: 'cruise-popup-wrap' });
+      marker.on('click', () => marker.openPopup());
+    });
+
+    // ── animated ship sailing the route ──────────────────────────────────
+    const shipIcon = L.divIcon({
+      className: 'ship-marker-icon',
+      html: `<div style="font-size:24px;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.8))">🚢</div>`,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+    });
+    const shipMarker = L.marker(routeCoords[0], { icon: shipIcon, zIndexOffset: 200 }).addTo(map);
+
+    // Interpolate along the full route
+    const allCoords = routeCoords;
+    let step = 0;
+    const totalSteps = allCoords.length - 1;
+    let segProgress = 0;
+    const SPEED = 0.004; // fraction of segment per frame
+
+    function sailShip() {
+      if (step >= totalSteps) { step = 0; segProgress = 0; }
+      const from = allCoords[step];
+      const to   = allCoords[step + 1];
+      segProgress += SPEED;
+      if (segProgress >= 1) { step++; segProgress = 0; }
+      const lat = from[0] + (to[0] - from[0]) * segProgress;
+      const lng = from[1] + (to[1] - from[1]) * segProgress;
+      shipMarker.setLatLng([lat, lng]);
+      requestAnimationFrame(sailShip);
+    }
+    sailShip();
+
+    // Fit map to show all ports with padding
+    map.fitBounds(L.latLngBounds(ports.map(p => [p.lat, p.lng])), { padding: [40, 40] });
+  })();
   </script>
 
 </body>
